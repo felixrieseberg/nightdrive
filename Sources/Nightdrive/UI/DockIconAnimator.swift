@@ -14,6 +14,8 @@ final class DockIconAnimator {
   private var frames: [NSImage] = []
   private var timer: Timer?
   private var frameIndex = 0
+  private var isWindowResizing = false
+  private var liveResizeObservers: [any NSObjectProtocol] = []
 
   init(player: PlayerController) {
     self.player = player
@@ -24,6 +26,7 @@ final class DockIconAnimator {
     guard frames.isEmpty else { return }
     frames = Self.loadFrames()
     guard !frames.isEmpty else { return }
+    observeLiveResize()
     observePlayback()
   }
 
@@ -49,9 +52,37 @@ final class DockIconAnimator {
     updateAnimationState()
   }
 
+  /// The timer runs in `.common` mode so the icon keeps marching while a menu
+  /// tracks, which also means it fires all through a window drag — where each
+  /// frame costs AppKit an icon conversion on the main thread.
+  private func observeLiveResize() {
+    for (name, resizing) in [
+      (NSWindow.willStartLiveResizeNotification, true),
+      (NSWindow.didEndLiveResizeNotification, false),
+    ] {
+      let observer = NotificationCenter.default.addObserver(
+        forName: name, object: nil, queue: .main
+      ) { [weak self] _ in
+        MainActor.assumeIsolated {
+          guard let self, self.isWindowResizing != resizing else { return }
+          self.isWindowResizing = resizing
+          self.updateAnimationState()
+        }
+      }
+      liveResizeObservers.append(observer)
+    }
+  }
+
+  isolated deinit {
+    for observer in liveResizeObservers {
+      NotificationCenter.default.removeObserver(observer)
+    }
+  }
+
   private func updateAnimationState() {
     let shouldAnimate =
       player.isPlaying
+      && !isWindowResizing
       && !NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
     if shouldAnimate {
       startTimer()
@@ -78,8 +109,9 @@ final class DockIconAnimator {
   private func stopTimer() {
     timer?.invalidate()
     timer = nil
+    // A resize pause resumes where it stopped; only a real halt rewinds.
+    guard !isWindowResizing else { return }
     frameIndex = 0
-    // Restore the bundle's static icon.
     NSApp.applicationIconImage = nil
   }
 

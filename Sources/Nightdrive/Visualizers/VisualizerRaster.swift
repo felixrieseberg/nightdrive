@@ -48,9 +48,15 @@ class RasterVisualizer: Visualizer {
     didBeat = false
     resetRaster()
     raster.clear()
+    raster.forget()
   }
 
   final func draw(_ frame: VisualizerFrame, into context: inout GraphicsContext) {
+    let rect = CGRect(origin: .zero, size: frame.size)
+    // Each new width costs two buffer reallocations plus a full regeneration,
+    // so a drag stretches the picture on hand and resumes on mouse up.
+    if frame.isLiveResizing, raster.blitLast(into: &context, in: rect) { return }
+
     let deltaTime = energy.update(frame)
     didBeat = didBeat || energy.didBeat
     let resized = raster.configure(for: frame.size, rows: rows)
@@ -74,9 +80,7 @@ class RasterVisualizer: Visualizer {
       case .wipe: raster.wipe(boot)
       }
     }
-    raster.blit(
-      into: &context, in: CGRect(origin: .zero, size: frame.size),
-      ramp: inkRamp(frame.palette), levels: levels)
+    raster.blit(into: &context, in: rect, ramp: inkRamp(frame.palette), levels: levels)
   }
 
   func resetRaster() {}
@@ -94,6 +98,14 @@ class RasterVisualizer: Visualizer {
   }
 }
 
+/// Frees the buffer an image was built from. Core Graphics calls this on
+/// whichever thread drops the last reference, so it must stay off the actor.
+private nonisolated func releaseRasterPixels(
+  _ info: UnsafeMutableRawPointer?, _ data: UnsafeRawPointer, _ size: Int
+) {
+  UnsafeMutableRawPointer(mutating: data).deallocate()
+}
+
 @MainActor
 final class VisualizerRaster {
   private(set) var width = 0
@@ -102,8 +114,9 @@ final class VisualizerRaster {
   private(set) var pixels: [UInt8] = []
 
   private var scratch: [UInt8] = []
-  private var argb: [UInt8] = []
   private var lut = InkLUT(ramp: .init(stops: []), table: [])
+  /// The most recent blit, kept so a drag can stretch it.
+  private var lastImage: CGImage?
   private let colorSpace = CGColorSpaceCreateDeviceRGB()
 
   var isEmpty: Bool { width <= 0 || height <= 0 }
@@ -139,7 +152,7 @@ final class VisualizerRaster {
     height = 0
     pixels = []
     scratch = []
-    argb = []
+    lastImage = nil
     return true
   }
 
@@ -153,8 +166,13 @@ final class VisualizerRaster {
     let count = w * h
     pixels = [UInt8](repeating: 0, count: count)
     scratch = [UInt8](repeating: 0, count: count)
-    argb = [UInt8](repeating: 0, count: count * 4)
     return true
+  }
+
+  /// Drops the held image so a drag cannot stretch a picture belonging to a
+  /// mode the deck has moved on from.
+  func forget() {
+    lastImage = nil
   }
 
   // MARK: - Writing
@@ -330,6 +348,21 @@ final class VisualizerRaster {
   ) {
     guard !isEmpty, rect.width > 0, rect.height > 0, let image = image(ramp: ramp, levels: levels)
     else { return }
+    lastImage = image
+    Self.draw(image, into: &ctx, in: rect, opacity: opacity)
+  }
+
+  /// Redraws the last blitted image at a new size without touching the raster.
+  /// False when nothing is held yet, so callers fall back to a full frame.
+  func blitLast(into ctx: inout GraphicsContext, in rect: CGRect, opacity: Double = 1) -> Bool {
+    guard let lastImage, rect.width > 0, rect.height > 0 else { return false }
+    Self.draw(lastImage, into: &ctx, in: rect, opacity: opacity)
+    return true
+  }
+
+  private static func draw(
+    _ image: CGImage, into ctx: inout GraphicsContext, in rect: CGRect, opacity: Double
+  ) {
     var layer = ctx
     if opacity < 1 { layer.opacity = opacity }
     layer.draw(Image(decorative: image, scale: 1).interpolation(.none), in: rect)
@@ -337,32 +370,46 @@ final class VisualizerRaster {
 
   func image(ramp: VisualizerInkRamp, levels: Int = 0) -> CGImage? {
     guard !isEmpty else { return nil }
-    if lut.ramp != ramp { lut = InkLUT(ramp: ramp) }
-    let table = lut.table
+    // The unchecked writes below index the table by intensity, so the sentinel
+    // empty LUT has to be rebuilt even if its ramp happens to match.
+    if lut.ramp != ramp || lut.table.count < 256 * 4 { lut = InkLUT(ramp: ramp) }
+    let count = width * height * 4
+    // The provider owns this and frees it when the image goes, so a frame
+    // writes its pixels once instead of staging them in an array to copy.
+    let out = UnsafeMutablePointer<UInt8>.allocate(capacity: count)
     let quantize = levels >= 2
-
-    for y in 0..<height {
-      let row = y * width
-      for x in 0..<width {
-        var intensity = Int(pixels[row + x])
-        if quantize { intensity = Int(Self.dither(pixels[row + x], x: x, y: y, levels: levels)) }
-        let entry = intensity * 4
-        let out = (row + x) * 4
-        argb[out] = table[entry]
-        argb[out + 1] = table[entry + 1]
-        argb[out + 2] = table[entry + 2]
-        argb[out + 3] = table[entry + 3]
+    lut.table.withUnsafeBufferPointer { table in
+      pixels.withUnsafeBufferPointer { source in
+        var index = 0
+        for y in 0..<height {
+          let row = y * width
+          for x in 0..<width {
+            let raw = source[row + x]
+            let intensity =
+              quantize ? Int(Self.dither(raw, x: x, y: y, levels: levels)) : Int(raw)
+            let entry = intensity * 4
+            out[index] = table[entry]
+            out[index + 1] = table[entry + 1]
+            out[index + 2] = table[entry + 2]
+            out[index + 3] = table[entry + 3]
+            index += 4
+          }
+        }
       }
     }
 
-    return argb.withUnsafeBufferPointer { buffer -> CGImage? in
-      guard let provider = CGDataProvider(data: Data(buffer: buffer) as CFData) else { return nil }
-      return CGImage(
-        width: width, height: height, bitsPerComponent: 8, bitsPerPixel: 32,
-        bytesPerRow: width * 4, space: colorSpace,
-        bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue),
-        provider: provider, decode: nil, shouldInterpolate: false, intent: .defaultIntent)
+    guard
+      let provider = CGDataProvider(
+        dataInfo: nil, data: out, size: count, releaseData: releaseRasterPixels)
+    else {
+      out.deallocate()
+      return nil
     }
+    return CGImage(
+      width: width, height: height, bitsPerComponent: 8, bitsPerPixel: 32,
+      bytesPerRow: width * 4, space: colorSpace,
+      bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue),
+      provider: provider, decode: nil, shouldInterpolate: false, intent: .defaultIntent)
   }
 
   // MARK: - Dither

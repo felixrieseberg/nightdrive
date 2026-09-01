@@ -35,6 +35,13 @@ final class VisualizerClock {
     return virtualTime
   }
 
+  /// Re-bases on wall time without advancing, so a stretch of suppressed
+  /// frames resumes where it left off instead of jumping.
+  func hold(at now: Date) -> TimeInterval {
+    lastReal = now
+    return virtualTime
+  }
+
   func reset() {
     virtualTime = 0
     lastReal = nil
@@ -49,6 +56,7 @@ struct VisualizerView: View {
   let booting: Bool
 
   @Environment(\.windowIsVisible) private var windowIsVisible
+  @Environment(\.windowIsLiveResizing) private var windowIsLiveResizing
 
   @State private var clock = VisualizerClock()
 
@@ -64,7 +72,7 @@ struct VisualizerView: View {
           .animation(
             minimumInterval: VisualizerHeartbeat.interval(
               isPlaying: player.isPlaying, booting: booting),
-            paused: !active || !windowIsVisible)
+            paused: !active || !windowIsVisible || windowIsLiveResizing)
         ) { timeline in
           canvas(visualizer, now: timeline.date)
         }
@@ -96,11 +104,14 @@ struct VisualizerView: View {
   private func canvas(_ visualizer: any Visualizer, now: Date) -> some View {
     // A hidden window reads untracked values so it stops re-rendering and
     // releases its render surfaces; the windowIsVisible flip refreshes it.
+    let resizing = windowIsLiveResizing
     var frame = VisualizerFrame(
       size: .zero,
-      time: clock.advance(
-        to: now,
-        scale: VisualizerHeartbeat.timeScale(isPlaying: player.isPlaying, booting: booting)),
+      time: resizing
+        ? clock.hold(at: now)
+        : clock.advance(
+          to: now,
+          scale: VisualizerHeartbeat.timeScale(isPlaying: player.isPlaying, booting: booting)),
       spectrum: windowIsVisible ? player.spectrum : player.untrackedSpectrum,
       peaks: windowIsVisible ? player.spectrumPeaks : player.untrackedSpectrumPeaks,
       waveform: windowIsVisible ? player.waveform : player.untrackedWaveform,
@@ -112,7 +123,8 @@ struct VisualizerView: View {
       artist: player.currentTrack?.artist ?? "",
       album: player.currentTrack?.album ?? "",
       boot: selfTest(at: now),
-      palette: VFDTheme.shared.palette)
+      palette: VFDTheme.shared.palette,
+      isLiveResizing: resizing)
     DemoSimulation.excite(&frame)
 
     return Canvas { context, size in
