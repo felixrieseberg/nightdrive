@@ -7,6 +7,15 @@
   final class DemoStage {
     var dipOpacity: Double = 0
     var endCardVisible = false
+    var captureBadgeMaskVisible = false
+
+    func showCaptureBadgeMask() {
+      captureBadgeMaskVisible = true
+    }
+
+    func hideCaptureBadgeMask() {
+      captureBadgeMaskVisible = false
+    }
 
     func coverWindowChrome() {
       guard let window = DemoInput.mainWindow else { return }
@@ -25,6 +34,7 @@
     func reset() {
       dipOpacity = 0
       endCardVisible = false
+      captureBadgeMaskVisible = false
       if let window = DemoInput.mainWindow {
         Self.titlebarContainer(in: window)?.alphaValue = 1
         for kind in Self.windowButtons {
@@ -44,9 +54,13 @@
 
   struct DemoStageOverlay: View {
     let stage: DemoStage
+    let deckProgress: CGFloat
 
     var body: some View {
-      ZStack {
+      ZStack(alignment: .topLeading) {
+        if stage.captureBadgeMaskVisible {
+          DemoCaptureBadgeMask(deckProgress: deckProgress)
+        }
         if stage.endCardVisible {
           DemoEndCard()
         }
@@ -55,6 +69,23 @@
           .ignoresSafeArea()
       }
       .allowsHitTesting(false)
+    }
+  }
+
+  private struct DemoCaptureBadgeMask: View {
+    let deckProgress: CGFloat
+
+    private var faceplateHeight: CGFloat {
+      HeadUnitBar.height + DeckMechanism.reservedHeight(deckProgress)
+        + DeckMechanism.contentSpacing(deckProgress)
+    }
+
+    var body: some View {
+      HeadUnitBar.faceplate
+        .frame(width: 84, height: faceplateHeight)
+        .frame(width: 84, height: HeadUnitBar.height, alignment: .top)
+        .clipped()
+        .ignoresSafeArea()
     }
   }
 

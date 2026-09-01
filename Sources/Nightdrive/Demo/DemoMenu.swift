@@ -47,7 +47,9 @@ extension View {
     #if NIGHTDRIVE_DEVELOPMENT_TOOLS
       self
         .overlay { DemoCursorOverlay(cursor: app.demo.cursor) }
-        .overlay { DemoStageOverlay(stage: app.demo.stage) }
+        .overlay {
+          DemoStageOverlay(stage: app.demo.stage, deckProgress: app.deck.progress)
+        }
     #else
       self
     #endif

@@ -89,11 +89,15 @@
       runTask = Task { @MainActor [weak self] in
         do {
           if self?.automaticallyRecordsVideo == true, let window = DemoInput.mainWindow {
+            self?.stage.showCaptureBadgeMask()
             do {
               try await self?.recorder.start(
                 window: window, trackTitle: track.title,
                 showsSystemCursor: self?.cursor.useRealCursor == true)
             } catch {
+              if self?.runGeneration == generation {
+                self?.stage.hideCaptureBadgeMask()
+              }
               if !(error is CancellationError) {
                 DemoLog.note(
                   "continuing track \(track.id) without video: \(error.localizedDescription)")
