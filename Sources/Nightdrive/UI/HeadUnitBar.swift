@@ -454,6 +454,9 @@ struct DeckSearchField: View {
       }
     }
     .onChange(of: app.searchFocusRequest) { focused = true }
+    .onChange(of: app.isQuickSearchPresented) {
+      if app.isQuickSearchPresented { focused = false }
+    }
     .onChange(of: focused) { app.searchFieldFocused = focused }
     .task {
       await Task.pause(for: .milliseconds(400))
