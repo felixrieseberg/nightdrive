@@ -1,0 +1,171 @@
+#if NIGHTDRIVE_DEVELOPMENT_TOOLS
+  import AppKit
+  import SwiftUI
+
+  @MainActor
+  @Observable
+  final class DemoStage {
+    var dipOpacity: Double = 0
+    var endCardVisible = false
+
+    func coverWindowChrome() {
+      guard let window = DemoInput.mainWindow else { return }
+      setWindowChromeOpacity(0)
+      for kind in Self.windowButtons {
+        window.standardWindowButton(kind)?.isHidden = true
+      }
+    }
+
+    func setWindowChromeOpacity(_ opacity: Double) {
+      guard let window = DemoInput.mainWindow else { return }
+      let clamped = CGFloat(max(0, min(1, opacity)))
+      Self.titlebarContainer(in: window)?.alphaValue = clamped
+    }
+
+    func reset() {
+      dipOpacity = 0
+      endCardVisible = false
+      if let window = DemoInput.mainWindow {
+        Self.titlebarContainer(in: window)?.alphaValue = 1
+        for kind in Self.windowButtons {
+          window.standardWindowButton(kind)?.isHidden = false
+        }
+      }
+    }
+
+    private static let windowButtons: [NSWindow.ButtonType] = [
+      .closeButton, .miniaturizeButton, .zoomButton,
+    ]
+
+    private static func titlebarContainer(in window: NSWindow) -> NSView? {
+      window.standardWindowButton(.closeButton)?.superview?.superview
+    }
+  }
+
+  struct DemoStageOverlay: View {
+    let stage: DemoStage
+
+    var body: some View {
+      ZStack {
+        if stage.endCardVisible {
+          DemoEndCard()
+        }
+        DemoStage.dipColor
+          .opacity(stage.dipOpacity)
+          .ignoresSafeArea()
+      }
+      .allowsHitTesting(false)
+    }
+  }
+
+  extension DemoStage {
+    static let dipColor = Color(red: 0.016, green: 0.02, blue: 0.024)
+  }
+
+  private struct DemoEndCard: View {
+    @State private var breathe = false
+
+    static let mint = Color(red: 0x73 / 255.0, green: 1.0, blue: 0xD6 / 255.0)
+    static let amber = Color(red: 1.0, green: 0xB8 / 255.0, blue: 0x5C / 255.0)
+    static let dim = Color(red: 0x5C / 255.0, green: 0x6E / 255.0, blue: 0x68 / 255.0)
+
+    var body: some View {
+      ZStack {
+        DemoStage.dipColor
+        RadialGradient(
+          colors: [Self.mint.opacity(breathe ? 0.10 : 0.06), .clear],
+          center: .center, startRadius: 0, endRadius: 560
+        )
+        content
+      }
+      .ignoresSafeArea()
+      .onAppear {
+        withAnimation(.easeInOut(duration: 6).repeatForever(autoreverses: true)) {
+          breathe = true
+        }
+      }
+    }
+
+    private var content: some View {
+      VStack(spacing: 0) {
+        Text(verbatim: "· p r e s e n t i n g ·")
+          .font(.system(size: 13, design: .monospaced))
+          .kerning(5)
+          .foregroundStyle(Self.dim)
+        WebsiteWordmark()
+          .shadow(color: Self.mint.opacity(breathe ? 0.55 : 0.35), radius: 22)
+          .shadow(color: Self.mint.opacity(0.9), radius: 4)
+          .padding(.top, 22)
+        Text(verbatim: "NOSTALGIC, NOT STUCK IN THE PAST")
+          .font(.system(size: 15, weight: .semibold, design: .monospaced))
+          .kerning(5)
+          .foregroundStyle(Self.amber)
+          .shadow(color: Self.amber.opacity(0.5), radius: 10)
+          .padding(.top, 30)
+        Text(verbatim: "Free for macOS")
+          .font(.system(size: 20, weight: .semibold, design: .monospaced))
+          .kerning(2)
+          .foregroundStyle(VFD.accentInk)
+          .padding(.horizontal, 38)
+          .padding(.vertical, 15)
+          .background(Capsule().fill(VFD.accent))
+          .shadow(color: VFD.accent.opacity(0.45), radius: 18, y: 2)
+          .padding(.top, 44)
+      }
+      .padding(40)
+    }
+  }
+
+  /// The website hero's block-character wordmark, rendered cell-by-cell so
+  /// the art stays seamless at any size (text rendering would leave
+  /// line-height gaps through the solid blocks).
+  private struct WebsiteWordmark: View {
+    private static let art: [[Character]] = [
+      "       ▄█▄    ███ ███   ▄██████▄  ███     ███ █████████ ████████▄   █████████▄  ███ ███     ███  ▄███████",
+      "     ████▄░░ ███░███░▄██▀▀▀▀▀▀▀▀░███░░░  ███░█████████░███▀▀▀▀▀██▄░███▀▀▀▀▀███░███░░███░░ ███ ░███▀▀▀▀▀▀░░░",
+      "    █████▄░░███░███░███░░░░░░░░░███░░░  ███░░░ ███░░░░███░░░░░███░███░░░░░███░███░░▀██▄░▄██▀░░███░░░░░░░░░",
+      "   ███░███░███░███░███░░░▄▄▄▄▄ ███████████░░░ ███░░░ ███░░░  ███░███████████░███░░░███░███░░░███████",
+      "  ███░░▀█████░███░███░░░█████░███▀▀▀▀▀███░░░ ███░░░ ███░░░  ███░███▀███▀▀▀▀░███░░░▀██▄██▀░░░███▀▀▀▀░░░",
+      " ▓▓▓░░░▀▓▓▓▓░▓▓▓░▀▓▓▄▄▄▄▄▓▓▓░▓▓▓░░░░░▓▓▓░░░ ▓▓▓░░░ ▓▓▓▄▄▄▄▄▓▓▀░▓▓▓░░▀▓▓▄░░░▓▓▓░░░ ▓▓▓▓▓░░░░▓▓▓▄▄▄▄▄▄░",
+      "▒▒▒░░░ ▀▒▀░░▒▒▒░░░▀▒▒▒▒▒▒▒▒░▒▒▒░░░  ▒▒▒░░░ ▒▒▒░░░ ▒▒▒▒▒▒▒▒▀░░░▒▒▒░░░ ▀▒▒▄░▒▒▒░░░  ▒▒▒░░░░  ▀▒▒▒▒▒▒▒░░░",
+      "  ░░░    ░░░  ░░░   ░░░░░░░░░ ░░░     ░░░    ░░░    ░░░░░░░░░   ░░░    ░░░░ ░░░     ░░░      ░░░░░░░░",
+    ].map(Array.init)
+
+    private static let columns = art.map(\.count).max() ?? 1
+    private static let cellWidth: CGFloat = 8
+    private static let cellHeight: CGFloat = 13
+
+    var body: some View {
+      Canvas { context, size in
+        let cellW = size.width / CGFloat(Self.columns)
+        let cellH = size.height / CGFloat(Self.art.count)
+        for (rowIndex, row) in Self.art.enumerated() {
+          for (columnIndex, character) in row.enumerated() {
+            var rect = CGRect(
+              x: CGFloat(columnIndex) * cellW, y: CGFloat(rowIndex) * cellH,
+              width: cellW, height: cellH)
+            let alpha: Double
+            switch character {
+            case "█": alpha = 1
+            case "▓": alpha = 0.62
+            case "▒": alpha = 0.35
+            case "░": alpha = 0.13
+            case "▄":
+              alpha = 1
+              rect.origin.y += cellH / 2
+              rect.size.height = cellH / 2
+            case "▀":
+              alpha = 1
+              rect.size.height = cellH / 2
+            default: continue
+            }
+            context.fill(Path(rect), with: .color(DemoEndCard.mint.opacity(alpha)))
+          }
+        }
+      }
+      .frame(
+        width: CGFloat(Self.columns) * Self.cellWidth,
+        height: CGFloat(Self.art.count) * Self.cellHeight)
+    }
+  }
+#endif

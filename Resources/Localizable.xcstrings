@@ -1,0 +1,4714 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "      %@" : {
+
+    },
+    "      preview failed" : {
+
+    },
+    "      preview: %@" : {
+
+    },
+    "  ! %@" : {
+
+    },
+    "  ! %@: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "  ! %1$@: %2$@"
+          }
+        }
+      }
+    },
+    "  %@: %lld tracks" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "  %1$@: %2$lld tracks"
+          }
+        }
+      }
+    },
+    "  - %@" : {
+
+    },
+    "  - Not syncing %@: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "  - Not syncing %1$@: %2$@"
+          }
+        }
+      }
+    },
+    "  [%lld/%lld] %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "  [%1$lld/%2$lld] %3$@"
+          }
+        }
+      }
+    },
+    "  [%u] %@ – %@ (%@) %ums @ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "  [%1$u] %2$@ – %3$@ (%4$@) %5$ums @ %6$@"
+          }
+        }
+      }
+    },
+    "  [builtin] %@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "  [builtin] %1$@ %2$@"
+          }
+        }
+      }
+    },
+    "  [plugin ] %@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "  [plugin ] %1$@ %2$@"
+          }
+        }
+      }
+    },
+    "  ~ %@" : {
+
+    },
+    "%@" : {
+
+    },
+    "%@ %lld failed, including “%@”: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$lld failed, including “%3$@”: %4$@"
+          }
+        }
+      }
+    },
+    "%@ (line %@)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ (line %2$@)"
+          }
+        }
+      }
+    },
+    "%@ cannot be converted for this iPod: 1st- and 2nd-generation models play only MP3, which Nightdrive cannot encode." : {
+
+    },
+    "%@ could not be read (%@). That is an access problem, not corruption; restore access instead of resetting." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ could not be read (%2$@). That is an access problem, not corruption; restore access instead of resetting."
+          }
+        }
+      }
+    },
+    "%@ days" : {
+
+    },
+    "%@ does not exist; there is nothing to reset." : {
+
+    },
+    "%@ does not look like an iPod (no iPod_Control directory)" : {
+
+    },
+    "%@ hours" : {
+
+    },
+    "%@ in use" : {
+
+    },
+    "%@ is damaged and blocks library changes." : {
+
+    },
+    "%@ is in the deck's rotation" : {
+
+    },
+    "%@ is out of the rotation" : {
+
+    },
+    "%@ is readable; refusing to reset an intact sidecar." : {
+
+    },
+    "%@ minutes" : {
+
+    },
+    "%@ over capacity — syncing would drop %lld songs" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ over capacity — syncing would drop %2$lld songs"
+          }
+        }
+      }
+    },
+    "%@ over capacity — syncing would drop 1 song" : {
+
+    },
+    "%@ run JavaScript inside Nightdrive, so nothing loads until you approve them." : {
+
+    },
+    "%@ runs JavaScript inside Nightdrive, so nothing loads until you approve it." : {
+
+    },
+    "%@ · %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "%@ · %lld songs" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · %2$lld songs"
+          }
+        }
+      }
+    },
+    "%@ — %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ — %2$@"
+          }
+        }
+      }
+    },
+    "%@ — %@: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ — %2$@: %3$@"
+          }
+        }
+      }
+    },
+    "%@ — FAILED" : {
+
+    },
+    "%@ — PLUGIN ERROR" : {
+
+    },
+    "%@ — click to change visualizer" : {
+
+    },
+    "%@, %@, %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, %2$@, %3$@"
+          }
+        }
+      }
+    },
+    "%@, in the deck's rotation" : {
+
+    },
+    "%@." : {
+
+    },
+    "%@: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$@"
+          }
+        }
+      }
+    },
+    "%@: %@ → %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$@ → %3$@"
+          }
+        }
+      }
+    },
+    "%@: %lld entries pointed at tracks that no longer exist and were dropped." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$lld entries pointed at tracks that no longer exist and were dropped."
+          }
+        }
+      }
+    },
+    "%@: %lld songs could not be matched to library files and were dropped; this sync changed the iPod's track order, so the On-The-Go playlist could not be kept for a retry." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$lld songs could not be matched to library files and were dropped; this sync changed the iPod's track order, so the On-The-Go playlist could not be kept for a retry."
+          }
+        }
+      }
+    },
+    "%@: %lld songs could not be matched to library files; the On-The-Go playlist will be retried next sync." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$lld songs could not be matched to library files; the On-The-Go playlist will be retried next sync."
+          }
+        }
+      }
+    },
+    "%@: %lld songs not on the iPod were skipped." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$lld songs not on the iPod were skipped."
+          }
+        }
+      }
+    },
+    "%@: %lld songs on the iPod could not be matched to library files and were left out locally." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$lld songs on the iPod could not be matched to library files and were left out locally."
+          }
+        }
+      }
+    },
+    "%@: 1 entry pointed at tracks that no longer exist and were dropped." : {
+
+    },
+    "%@: 1 song could not be matched to a library file and was dropped; this sync changed the iPod's track order, so the On-The-Go playlist could not be kept for a retry." : {
+
+    },
+    "%@: 1 song could not be matched to a library file; the On-The-Go playlist will be retried next sync." : {
+
+    },
+    "%@: 1 song not on the iPod was skipped." : {
+
+    },
+    "%@: 1 song on the iPod could not be matched to a library file and was left out locally." : {
+
+    },
+    "%lld COVERS" : {
+
+    },
+    "%lld FAILED" : {
+
+    },
+    "%lld GB" : {
+
+    },
+    "%lld PLAYLISTS" : {
+
+    },
+    "%lld PLAYS IN" : {
+
+    },
+    "%lld REMOVED" : {
+
+    },
+    "%lld Stars" : {
+
+    },
+    "%lld TO IPOD" : {
+
+    },
+    "%lld TO LIBRARY" : {
+
+    },
+    "%lld UPDATED IN LIBRARY" : {
+
+    },
+    "%lld UPDATED ON IPOD" : {
+
+    },
+    "%lld album suggestions" : {
+
+    },
+    "%lld albums" : {
+
+    },
+    "%lld artists" : {
+
+    },
+    "%lld conflicting files will move to Trash." : {
+
+    },
+    "%lld copies selected." : {
+
+    },
+    "%lld corrections selected." : {
+
+    },
+    "%lld cover written to iPod" : {
+
+    },
+    "%lld covers written to iPod" : {
+
+    },
+    "%lld downloaded" : {
+
+    },
+    "%lld episodes" : {
+
+    },
+    "%lld failed operation" : {
+
+    },
+    "%lld failed operations" : {
+
+    },
+    "%lld favorites" : {
+
+    },
+    "%lld files are already in place." : {
+
+    },
+    "%lld files will move." : {
+
+    },
+    "%lld genres" : {
+
+    },
+    "%lld groups of duplicates found." : {
+
+    },
+    "%lld kbps" : {
+
+    },
+    "%lld library tracks excluded by the sync scope" : {
+
+    },
+    "%lld library-only songs kept locally." : {
+
+    },
+    "%lld library-only tracks kept locally" : {
+
+    },
+    "%lld local songs — releases with the same number of tracks are listed first." : {
+
+    },
+    "%lld local-only" : {
+
+    },
+    "%lld modes" : {
+
+    },
+    "%lld modes, %lld problems" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld modes, %2$lld problems"
+          }
+        }
+      }
+    },
+    "%lld modes, 1 problem" : {
+
+    },
+    "%lld new plugins are waiting for your approval" : {
+
+    },
+    "%lld of %lld modes in the rotation" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld modes in the rotation"
+          }
+        }
+      }
+    },
+    "%lld of %lld songs available" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld songs available"
+          }
+        }
+      }
+    },
+    "%lld of %lld songs selected" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld songs selected"
+          }
+        }
+      }
+    },
+    "%lld of 1 song selected" : {
+
+    },
+    "%lld ops, %lld strings" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld ops, %2$lld strings"
+          }
+        }
+      }
+    },
+    "%lld play picked up from iPod" : {
+
+    },
+    "%lld playlist change" : {
+
+    },
+    "%lld playlist changes" : {
+
+    },
+    "%lld playlists" : {
+
+    },
+    "%lld plays picked up from iPod" : {
+
+    },
+    "%lld plugins" : {
+
+    },
+    "%lld plugins didn't load" : {
+
+    },
+    "%lld podcasts" : {
+
+    },
+    "%lld recent plays" : {
+
+    },
+    "%lld removed from iPod" : {
+
+    },
+    "%lld selected" : {
+
+    },
+    "%lld songs" : {
+
+    },
+    "%lld songs couldn’t be updated. “%@” failed: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld songs couldn’t be updated. “%2$@” failed: %3$@"
+          }
+        }
+      }
+    },
+    "%lld songs moved to Trash." : {
+
+    },
+    "%lld songs need review. Nothing is changed until you select and confirm corrections." : {
+
+    },
+    "%lld songs on %@ are not in your library and would be permanently deleted from the iPod." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld songs on %2$@ are not in your library and would be permanently deleted from the iPod."
+          }
+        }
+      }
+    },
+    "%lld songs on %@ are still in your library but not in this sync, and would be permanently deleted from the iPod." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld songs on %2$@ are still in your library but not in this sync, and would be permanently deleted from the iPod."
+          }
+        }
+      }
+    },
+    "%lld songs on the iPod are not in the library (kept; pass --confirm-removals to delete them)." : {
+
+    },
+    "%lld songs on the iPod are not in this sync (kept; pass --confirm-removals to delete them)." : {
+
+    },
+    "%lld songs on the iPod are not in this sync (kept; two-way sync never removes iPod songs)." : {
+
+    },
+    "%lld songs selected" : {
+
+    },
+    "%lld songs selected." : {
+
+    },
+    "%lld songs unavailable" : {
+
+    },
+    "%lld songs up next" : {
+
+    },
+    "%lld stars" : {
+
+    },
+    "%lld to iPod" : {
+
+    },
+    "%lld to library" : {
+
+    },
+    "%lld track copied to iPod" : {
+
+    },
+    "%lld track copied to library" : {
+
+    },
+    "%lld track removed from iPod" : {
+
+    },
+    "%lld track updated in library" : {
+
+    },
+    "%lld track updated on iPod" : {
+
+    },
+    "%lld tracks" : {
+
+    },
+    "%lld tracks copied to iPod" : {
+
+    },
+    "%lld tracks copied to library" : {
+
+    },
+    "%lld tracks on iPod not in library (kept)" : {
+
+    },
+    "%lld tracks on iPod not in this sync (kept)" : {
+
+    },
+    "%lld tracks on the iPod are not in the library and were left alone." : {
+
+    },
+    "%lld tracks on the iPod were not in this sync and were left alone." : {
+
+    },
+    "%lld tracks removed from iPod" : {
+
+    },
+    "%lld tracks updated in library" : {
+
+    },
+    "%lld tracks updated on iPod" : {
+
+    },
+    "%lld unsupported audio files were left unchanged." : {
+
+    },
+    "%lld updated in library" : {
+
+    },
+    "%lld updated on iPod" : {
+
+    },
+    "%lldth" : {
+
+    },
+    "--scope playlists= needs at least one playlist name" : {
+
+    },
+    "--scope wants 'everything' or 'playlists=Name[,Name…]', got '%@'" : {
+
+    },
+    "--size wants WIDTHxHEIGHT within the preview pixel budget, e.g. 320x44" : {
+
+    },
+    "/" : {
+
+    },
+    "1 Star" : {
+
+    },
+    "1 album" : {
+
+    },
+    "1 album suggestion" : {
+
+    },
+    "1 artist" : {
+
+    },
+    "1 conflicting file will move to Trash." : {
+
+    },
+    "1 copy selected." : {
+
+    },
+    "1 correction selected." : {
+
+    },
+    "1 episode" : {
+
+    },
+    "1 favorite" : {
+
+    },
+    "1 file is already in place." : {
+
+    },
+    "1 file will move." : {
+
+    },
+    "1 genre" : {
+
+    },
+    "1 group of duplicates found." : {
+
+    },
+    "1 library track excluded by the sync scope" : {
+
+    },
+    "1 library-only song kept locally." : {
+
+    },
+    "1 library-only track kept locally" : {
+
+    },
+    "1 local song — releases with the same number of tracks are listed first." : {
+
+    },
+    "1 playlist" : {
+
+    },
+    "1 plugin" : {
+
+    },
+    "1 podcast" : {
+
+    },
+    "1 recent play" : {
+
+    },
+    "1 song" : {
+
+    },
+    "1 song couldn’t be updated. “%@” failed: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "1 song couldn’t be updated. “%1$@” failed: %2$@"
+          }
+        }
+      }
+    },
+    "1 song moved to Trash." : {
+
+    },
+    "1 song needs review. Nothing is changed until you select and confirm a correction." : {
+
+    },
+    "1 song on %@ is not in your library and would be permanently deleted from the iPod." : {
+
+    },
+    "1 song on %@ is still in your library but not in this sync, and would be permanently deleted from the iPod." : {
+
+    },
+    "1 song on the iPod is not in the library (kept; pass --confirm-removals to delete it)." : {
+
+    },
+    "1 song on the iPod is not in this sync (kept; pass --confirm-removals to delete it)." : {
+
+    },
+    "1 song on the iPod is not in this sync (kept; two-way sync never removes iPod songs)." : {
+
+    },
+    "1 song selected" : {
+
+    },
+    "1 song selected." : {
+
+    },
+    "1 song unavailable" : {
+
+    },
+    "1 song up next" : {
+
+    },
+    "1 star" : {
+
+    },
+    "1 track on iPod not in library (kept)" : {
+
+    },
+    "1 track on iPod not in this sync (kept)" : {
+
+    },
+    "1 track on the iPod is not in the library and was left alone." : {
+
+    },
+    "1 track on the iPod was not in this sync and was left alone." : {
+
+    },
+    "1 unsupported audio file was left unchanged." : {
+
+    },
+    "1st" : {
+
+    },
+    "2nd" : {
+
+    },
+    "3rd" : {
+
+    },
+    "A JavaScript visualizer loaded from your Visualizers folder." : {
+
+    },
+    "A checkerboard rotating and zooming under its own steam." : {
+
+    },
+    "A display mode loaded from the visualizers folder." : {
+
+    },
+    "A dot-matrix fire, fed by the bottom end." : {
+
+    },
+    "A file already exists at the destination." : {
+
+    },
+    "A fine-pitch spectrum with slow peak caps and an amber overload row." : {
+
+    },
+    "A ladder of level segments, climbing the way a deck's did." : {
+
+    },
+    "A lookup sends the artist, album, and song title already tagged on your files — nothing else." : {
+
+    },
+    "A new plugin is waiting for your approval" : {
+
+    },
+    "A non-profit service" : {
+
+    },
+    "A pair of moving-coil VU meters with the ballistics of the real thing." : {
+
+    },
+    "A playlist needs a name." : {
+
+    },
+    "A plugin didn't load" : {
+
+    },
+    "A still surface that a bass hit throws rings across." : {
+
+    },
+    "A sweeping radar line that leaves contacts glowing behind it." : {
+
+    },
+    "A sync or database repair is already running" : {
+
+    },
+    "A textured tunnel you fall down in time with the track." : {
+
+    },
+    "A visualizer built into Nightdrive." : {
+
+    },
+    "A wireframe solid turning slowly on two axes." : {
+
+    },
+    "AAC audio file" : {
+
+    },
+    "AIFF audio file" : {
+
+    },
+    "ALBUM" : {
+
+    },
+    "ALREADY IN SYNC" : {
+
+    },
+    "AMBER" : {
+
+    },
+    "AMBER GOLD" : {
+
+    },
+    "ANTI-THEFT SYSTEM ACTIVE · DOCK FACEPLATE TO RESUME" : {
+
+    },
+    "ARCTIC" : {
+
+    },
+    "ARCTIC LCD" : {
+
+    },
+    "ARTIST" : {
+
+    },
+    "AUDIOBOOK" : {
+
+    },
+    "Abort" : {
+
+    },
+    "About %@" : {
+
+    },
+    "Acknowledgments" : {
+
+    },
+    "Acknowledgments…" : {
+
+    },
+    "Actions" : {
+
+    },
+    "Activate to reattach the faceplate" : {
+
+    },
+    "Activate to switch to the next visualizer" : {
+
+    },
+    "Add" : {
+
+    },
+    "Add Selection to Up Next" : {
+
+    },
+    "Add Songs…" : {
+
+    },
+    "Add a folder level" : {
+
+    },
+    "Add to Favorites" : {
+
+    },
+    "Add to Playlist" : {
+
+    },
+    "Add to Up Next" : {
+
+    },
+    "Added in the last (days)" : {
+
+    },
+    "Added playlist \"%@\" to the library (%lld songs)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Added playlist \"%1$@\" to the library (%2$lld songs)"
+          }
+        }
+      }
+    },
+    "Added playlist \"%@\" to the library (1 song)" : {
+
+    },
+    "Adjust the volume" : {
+
+    },
+    "After enabling, Nightdrive also looks up albums missing MusicBrainz tags in the background and queues the matches as suggestions for your review — turn this off anytime in Settings → Online." : {
+
+    },
+    "AirPlay" : {
+
+    },
+    "Album" : {
+
+    },
+    "Album Artist" : {
+
+    },
+    "Album art changes were deferred because %lld existing covers could not be reconstructed safely." : {
+
+    },
+    "Album art changes were deferred because 1 existing cover could not be reconstructed safely." : {
+
+    },
+    "Album art for %lld tracks could not be read and was skipped." : {
+
+    },
+    "Album art for 1 track could not be read and was skipped." : {
+
+    },
+    "Album artist when tagged; Various Artists for compilations" : {
+
+    },
+    "Album artwork could not be installed (%@), and the previous artwork generation could not be fully restored (%@). Recovery files remain at %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Album artwork could not be installed (%1$@), and the previous artwork generation could not be fully restored (%2$@). Recovery files remain at %3$@"
+          }
+        }
+      }
+    },
+    "Album artwork was not changed because %lld existing covers could not be reconstructed from the iPod's files." : {
+
+    },
+    "Album artwork was not changed because 1 existing cover could not be reconstructed from the iPod's files." : {
+
+    },
+    "Album artwork was not changed because an untouched embedded cover does not match the pixels currently stored by the iPod." : {
+
+    },
+    "Album contains" : {
+
+    },
+    "Album lookup is available when every song is an MP3" : {
+
+    },
+    "Album lookup needs a selection of MP3s that share one album" : {
+
+    },
+    "Album title" : {
+
+    },
+    "Albums" : {
+
+    },
+    "All %lld modes in the rotation" : {
+
+    },
+    "All Playlists" : {
+
+    },
+    "All Visualizers" : {
+
+    },
+    "Allow Lookups" : {
+
+    },
+    "Allows Nightdrive to contact Apple's podcast directory and each show's publisher." : {
+
+    },
+    "Allows Nightdrive to contact musicbrainz.org to match your songs." : {
+
+    },
+    "Already matched" : {
+
+    },
+    "Already matching" : {
+
+    },
+    "Always moving" : {
+
+    },
+    "An organized podcast filename lost its download identifier." : {
+
+    },
+    "An oscilloscope trace with a few frames of phosphor still fading behind it." : {
+
+    },
+    "Animates continuously, even when no audio is playing." : {
+
+    },
+    "Any" : {
+
+    },
+    "Apply" : {
+
+    },
+    "Apply %lld Corrections…" : {
+
+    },
+    "Apply %lld metadata corrections?" : {
+
+    },
+    "Apply 1 Correction…" : {
+
+    },
+    "Apply 1 metadata correction?" : {
+
+    },
+    "Apply All Corrections…" : {
+
+    },
+    "Apply Changes" : {
+
+    },
+    "Apply Corrections…" : {
+
+    },
+    "Apply proposed correction" : {
+
+    },
+    "Approve" : {
+
+    },
+    "Approve %@" : {
+
+    },
+    "Approve All" : {
+
+    },
+    "Artist" : {
+
+    },
+    "Artist contains" : {
+
+    },
+    "Artists" : {
+
+    },
+    "Artwork" : {
+
+    },
+    "At least one mode has to stay in the rotation" : {
+
+    },
+    "Audio %@" : {
+
+    },
+    "Audio Conversion" : {
+
+    },
+    "Audio Output" : {
+
+    },
+    "Audio Output: %@" : {
+
+    },
+    "Audio Output: System Default" : {
+
+    },
+    "Audio Output: selected device unavailable" : {
+
+    },
+    "Audio files, file paths, folder names, and listening history never leave this Mac." : {
+
+    },
+    "Audio from the shorter file matches part of the longer file, but their lengths differ. Review them before removing anything." : {
+
+    },
+    "Audio output is unavailable. %@" : {
+
+    },
+    "Audiobook" : {
+
+    },
+    "Audiobooks" : {
+
+    },
+    "Automatic Lookup is Turned Off" : {
+
+    },
+    "Automatic metadata lookup is turned off." : {
+
+    },
+    "Automatically check shows for new episodes" : {
+
+    },
+    "Automatically download new episodes and delete played or older downloads" : {
+
+    },
+    "Automatically look up missing metadata" : {
+
+    },
+    "Automation" : {
+
+    },
+    "BPM" : {
+
+    },
+    "Back" : {
+
+    },
+    "Bars, a level ladder and a beat lamp on one panel — the busy setting." : {
+
+    },
+    "Bass Boost" : {
+
+    },
+    "Bit Rate" : {
+
+    },
+    "Blobs that swell, meet and merge on the bass." : {
+
+    },
+    "Bluetooth" : {
+
+    },
+    "Browse albums" : {
+
+    },
+    "Browse artists" : {
+
+    },
+    "Browse audiobooks" : {
+
+    },
+    "Browse genres" : {
+
+    },
+    "Browse playlists" : {
+
+    },
+    "Building library index… %lld of %lld steps" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Building library index… %1$lld of %2$lld steps"
+          }
+        }
+      }
+    },
+    "Built-in" : {
+
+    },
+    "Bulk metadata editing is available only when every selected song is an MP3 or MPEG-4 file" : {
+
+    },
+    "CAF audio file" : {
+
+    },
+    "CW-9940X" : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Change %@" : {
+
+    },
+    "Change selected metadata fields for all selected songs" : {
+
+    },
+    "Change the repeat mode" : {
+
+    },
+    "Characters falling in columns, thickening with the top end." : {
+
+    },
+    "Check Now" : {
+
+    },
+    "Check all shows for new episodes" : {
+
+    },
+    "Check each tag pattern you want to change." : {
+
+    },
+    "Check for Updates…" : {
+
+    },
+    "Check for updates automatically" : {
+
+    },
+    "Check now" : {
+
+    },
+    "Check the copies to move to the Trash." : {
+
+    },
+    "Check the spelling, or clear the search to see every song here." : {
+
+    },
+    "Checking %lld of %lld cached songs…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Checking %1$lld of %2$lld cached songs…"
+          }
+        }
+      }
+    },
+    "Checking 1 cached song…" : {
+
+    },
+    "Choose Artwork…" : {
+
+    },
+    "Choose Folder…" : {
+
+    },
+    "Choose Library Folder…" : {
+
+    },
+    "Choose Replacement…" : {
+
+    },
+    "Choose Visualizers…" : {
+
+    },
+    "Choose a library folder before downloading podcast episodes." : {
+
+    },
+    "Choose a library folder before saving library data." : {
+
+    },
+    "Choose a library folder to sync" : {
+
+    },
+    "Choose a music folder for your library, or drop audio files and folders here to play them without changing your library." : {
+
+    },
+    "Choose a primary genre by clicking a chip." : {
+
+    },
+    "Choose a show to browse its episodes." : {
+
+    },
+    "Choose a song, add one from the library, or drop audio files and folders here." : {
+
+    },
+    "Choose and arrange visualizers" : {
+
+    },
+    "Choose explicitly; MusicBrainz matching is unavailable." : {
+
+    },
+    "Choose library folder" : {
+
+    },
+    "Choose one or more audio files to play in Nightdrive." : {
+
+    },
+    "Choose the folder of audio files to use as your music library." : {
+
+    },
+    "Choose where Nightdrive sends audio." : {
+
+    },
+    "Choose your music folder" : {
+
+    },
+    "Choose…" : {
+
+    },
+    "Chosen Playlists…" : {
+
+    },
+    "Clean Up Genres" : {
+
+    },
+    "Clean Up Genres…" : {
+
+    },
+    "Clear Cache" : {
+
+    },
+    "Clear Menu" : {
+
+    },
+    "Clear Search" : {
+
+    },
+    "Clear Selection" : {
+
+    },
+    "Clear Up Next" : {
+
+    },
+    "Clear search" : {
+
+    },
+    "Clear search and show subscriptions" : {
+
+    },
+    "Clearing…" : {
+
+    },
+    "Click the deck visualizer" : {
+
+    },
+    "Click the deck's glass or press ⇧⌘V to step through the rotation." : {
+
+    },
+    "Click the empty faceplate bay" : {
+
+    },
+    "Click to add a genre" : {
+
+    },
+    "Close" : {
+
+    },
+    "Close Deck Display" : {
+
+    },
+    "Close the palette" : {
+
+    },
+    "Command Palette" : {
+
+    },
+    "Command Palette…" : {
+
+    },
+    "Comment" : {
+
+    },
+    "Compared with MusicBrainz genres." : {
+
+    },
+    "Comparing audio %lld of %lld…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Comparing audio %1$lld of %2$lld…"
+          }
+        }
+      }
+    },
+    "Comparing file contents %lld of %lld…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Comparing file contents %1$lld of %2$lld…"
+          }
+        }
+      }
+    },
+    "Comparing file contents…" : {
+
+    },
+    "Comparing filenames, tags, neighboring tracks, and local audio…" : {
+
+    },
+    "Comparing song information %lld of %lld…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Comparing song information %1$lld of %2$lld…"
+          }
+        }
+      }
+    },
+    "Comparing song information…" : {
+
+    },
+    "Compilation" : {
+
+    },
+    "Composer" : {
+
+    },
+    "Configure online metadata services" : {
+
+    },
+    "Conflicts with %@" : {
+
+    },
+    "Connect an iPod" : {
+
+    },
+    "Connected Bluetooth and AirPlay outputs appear here when macOS exposes them to Core Audio. Playback pauses if the active output disconnects." : {
+
+    },
+    "Controls" : {
+
+    },
+    "Convert to AAC at" : {
+
+    },
+    "Converted audio cache" : {
+
+    },
+    "Converted copies are cached so a track is only encoded once; the originals in the music folder are never modified." : {
+
+    },
+    "Copied %lld to iPod, %lld to library, updated %lld on iPod, %lld in library, removed %lld from iPod, %lld failures." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Copied %1$lld to iPod, %2$lld to library, updated %3$lld on iPod, %4$lld in library, removed %5$lld from iPod, %6$lld failures."
+          }
+        }
+      }
+    },
+    "Copied without reconstructed tags (%@)" : {
+
+    },
+    "Copy new songs and tag edits from this iPod; never copy, update, or remove iPod songs" : {
+
+    },
+    "Copy new songs and tag edits in either direction" : {
+
+    },
+    "Copy to Library" : {
+
+    },
+    "Copy to iPod" : {
+
+    },
+    "Copying from iPod: %@" : {
+
+    },
+    "Copying to iPod: %@" : {
+
+    },
+    "Could not create a staging area." : {
+
+    },
+    "Could not read the iPod's free space: %@" : {
+
+    },
+    "Create" : {
+
+    },
+    "Create a playlist first, then choose it here." : {
+
+    },
+    "Create a playlist to arrange songs in your own order." : {
+
+    },
+    "Created playlist \"%@\" on the iPod (%lld songs)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Created playlist \"%1$@\" on the iPod (%2$lld songs)"
+          }
+        }
+      }
+    },
+    "Created playlist \"%@\" on the iPod (1 song)" : {
+
+    },
+    "Cycle Repeat Mode" : {
+
+    },
+    "Database repaired" : {
+
+    },
+    "Date Modified" : {
+
+    },
+    "Decade" : {
+
+    },
+    "Deck %@" : {
+
+    },
+    "Deck & Visualizers" : {
+
+    },
+    "Deep" : {
+
+    },
+    "Default app controls are unavailable" : {
+
+    },
+    "Delete Playlist" : {
+
+    },
+    "Delete all but latest %lld episodes" : {
+
+    },
+    "Delete all but latest episode" : {
+
+    },
+    "Delete episodes" : {
+
+    },
+    "Delete from iPod" : {
+
+    },
+    "Delete older episodes" : {
+
+    },
+    "Delete played episodes" : {
+
+    },
+    "Delete songs not in library from iPod" : {
+
+    },
+    "Delete songs not in this sync from iPod" : {
+
+    },
+    "Delete the downloaded file from your library" : {
+
+    },
+    "Delete “%@” from %@?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Delete “%1$@” from %2$@?"
+          }
+        }
+      }
+    },
+    "Delete “%@”?" : {
+
+    },
+    "Deletes iPod songs that Nightdrive cannot match to the library" : {
+
+    },
+    "Deletes library songs on the iPod that are not included in this sync" : {
+
+    },
+    "Delete…" : {
+
+    },
+    "Detach Faceplate" : {
+
+    },
+    "Detach or reattach the faceplate" : {
+
+    },
+    "Details" : {
+
+    },
+    "Detect duplicate songs in the library" : {
+
+    },
+    "Detect suspicious song information" : {
+
+    },
+    "Development build" : {
+
+    },
+    "Device name" : {
+
+    },
+    "Device plays were kept for the next sync (%@)." : {
+
+    },
+    "Device tag edits can only be written back to MP3 and MPEG-4 audio files." : {
+
+    },
+    "Devices" : {
+
+    },
+    "Different album" : {
+
+    },
+    "Different lengths" : {
+
+    },
+    "Different position" : {
+
+    },
+    "Disc" : {
+
+    },
+    "Disc Count" : {
+
+    },
+    "Disc number, like Disc 1" : {
+
+    },
+    "Disc: %@  ·  Track: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Disc: %1$@  ·  Track: %2$@"
+          }
+        }
+      }
+    },
+    "Discard Edits and Reload" : {
+
+    },
+    "Discovering music files…" : {
+
+    },
+    "Discovering music files… %lld items checked" : {
+
+    },
+    "Dismiss" : {
+
+    },
+    "DisplayPort" : {
+
+    },
+    "Don't Allow" : {
+
+    },
+    "Done" : {
+
+    },
+    "Double-click a track" : {
+
+    },
+    "Download" : {
+
+    },
+    "Download new episodes" : {
+
+    },
+    "Download this episode into your library" : {
+
+    },
+    "Downloaded" : {
+
+    },
+    "Downloading…" : {
+
+    },
+    "Drag across the visualizer" : {
+
+    },
+    "Drag songs to reorder" : {
+
+    },
+    "Drag the deck seek bar" : {
+
+    },
+    "Drag the volume slider" : {
+
+    },
+    "Drawn straight from the audio as it plays." : {
+
+    },
+    "Drop to Add to Up Next" : {
+
+    },
+    "Drop to Play" : {
+
+    },
+    "Duration" : {
+
+    },
+    "EDIT THE FILE AND CHOOSE CONTROLS ▸ VISUALIZER ▸ RELOAD PLUGINS" : {
+
+    },
+    "Each song’s own artist, even on compilations" : {
+
+    },
+    "Edit Info for %lld Songs…" : {
+
+    },
+    "Edit Info for 1 Song…" : {
+
+    },
+    "Edit Info for Selected Songs…" : {
+
+    },
+    "Edit Info…" : {
+
+    },
+    "Edit Rules" : {
+
+    },
+    "Edit Rules…" : {
+
+    },
+    "Edit info for the selected tracks" : {
+
+    },
+    "Edit this song's metadata and artwork" : {
+
+    },
+    "Eject %@" : {
+
+    },
+    "Eject the iPod after a sync completes without errors" : {
+
+    },
+    "Eject when finished" : {
+
+    },
+    "Episode %lld" : {
+
+    },
+    "Equalizer" : {
+
+    },
+    "Esc" : {
+
+    },
+    "Even after trimming, %@ is %@ short. Free up space or narrow the sync scope." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Even after trimming, %1$@ is %2$@ short. Free up space or narrow the sync scope."
+          }
+        }
+      }
+    },
+    "Every file already matches this structure." : {
+
+    },
+    "Every planned copy completed successfully." : {
+
+    },
+    "Every selected song already carries a MusicBrainz release. Look it up again anyway?" : {
+
+    },
+    "Every song in the library is unique." : {
+
+    },
+    "Everything" : {
+
+    },
+    "Everything was already in sync." : {
+
+    },
+    "Evidence" : {
+
+    },
+    "Example: %@" : {
+
+    },
+    "Export M3U…" : {
+
+    },
+    "FACEPLATE REMOVED" : {
+
+    },
+    "FLAC audio file" : {
+
+    },
+    "Faceplate removed — click to reattach" : {
+
+    },
+    "Faceplate removed, security system active" : {
+
+    },
+    "Failed Operations (%lld)" : {
+
+    },
+    "Fast: compares file contents, tags, titles, and lengths." : {
+
+    },
+    "Favorite" : {
+
+    },
+    "Favorites and recent plays" : {
+
+    },
+    "Favorites only" : {
+
+    },
+    "Feeds come from publishers" : {
+
+    },
+    "File" : {
+
+    },
+    "File Associations" : {
+
+    },
+    "File Associations Couldn’t Be Changed" : {
+
+    },
+    "File not currently in the library" : {
+
+    },
+    "Filename and embedded tags conflict" : {
+
+    },
+    "Filename explicitly identifies the artist as “%@,” but the embedded artist is “%@.”" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filename explicitly identifies the artist as “%1$@,” but the embedded artist is “%2$@.”"
+          }
+        }
+      }
+    },
+    "Filename identifies disc %lld, but the embedded disc number is %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filename identifies disc %1$lld, but the embedded disc number is %2$@."
+          }
+        }
+      }
+    },
+    "Filename identifies the title as “%@,” but the embedded title is “%@.”" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filename identifies the title as “%1$@,” but the embedded title is “%2$@.”"
+          }
+        }
+      }
+    },
+    "Filename starts with track %lld, but the embedded track number is %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filename starts with track %1$lld, but the embedded track number is %2$@."
+          }
+        }
+      }
+    },
+    "Filenames, tags, and local library evidence look consistent." : {
+
+    },
+    "Files marked as audiobooks will appear here. Mark songs from the library's context menu." : {
+
+    },
+    "Filter by visualizer group" : {
+
+    },
+    "Find" : {
+
+    },
+    "Find Duplicates" : {
+
+    },
+    "Find Duplicates…" : {
+
+    },
+    "Find Metadata Problems" : {
+
+    },
+    "Find Metadata Problems…" : {
+
+    },
+    "Find in the current view" : {
+
+    },
+    "Finishing duplicate groups…" : {
+
+    },
+    "First connected iPod" : {
+
+    },
+    "Flat" : {
+
+    },
+    "Follow this show and check it for new episodes" : {
+
+    },
+    "Follows the audio" : {
+
+    },
+    "Format" : {
+
+    },
+    "Formats the iPod can't play, like FLAC, are converted on sync." : {
+
+    },
+    "Free %@" : {
+
+    },
+    "GENRE" : {
+
+    },
+    "General" : {
+
+    },
+    "General Settings…" : {
+
+    },
+    "Genre" : {
+
+    },
+    "Genre change" : {
+
+    },
+    "Genre contains" : {
+
+    },
+    "Genres" : {
+
+    },
+    "Go to your music library" : {
+
+    },
+    "Greeting" : {
+
+    },
+    "Grouping" : {
+
+    },
+    "Grouping tag" : {
+
+    },
+    "HDMI" : {
+
+    },
+    "Hide this suggestion and don't propose this album again" : {
+
+    },
+    "High confidence" : {
+
+    },
+    "ICE" : {
+
+    },
+    "ICE BLUE" : {
+
+    },
+    "Identical files" : {
+
+    },
+    "Ignored malformed On-The-Go playlist file %@." : {
+
+    },
+    "Ignored unreadable On-The-Go playlist file %@." : {
+
+    },
+    "Import M3U Playlist" : {
+
+    },
+    "Imported On-The-Go playlist as \"%@\" (%lld songs)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Imported On-The-Go playlist as \"%1$@\" (%2$lld songs)"
+          }
+        }
+      }
+    },
+    "Imported On-The-Go playlist as \"%@\" (1 song)" : {
+
+    },
+    "In sync with your iPod" : {
+
+    },
+    "In sync with your library" : {
+
+    },
+    "In sync · %lld local-only tracks" : {
+
+    },
+    "In sync · 1 local-only track" : {
+
+    },
+    "Include %@" : {
+
+    },
+    "Include %@ in this bulk edit" : {
+
+    },
+    "Include %@: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Include %1$@: %2$@"
+          }
+        }
+      }
+    },
+    "Include tag pattern" : {
+
+    },
+    "Include this group in the cleanup" : {
+
+    },
+    "Install the Nightdrive app to manage file associations." : {
+
+    },
+    "Interference patterns rolling through the tube's four inks." : {
+
+    },
+    "Its title, artist, album, disc, and track tags duplicate “%@,” whose filename agrees with those tags." : {
+
+    },
+    "Keep" : {
+
+    },
+    "Keep Current Defaults" : {
+
+    },
+    "Keep converted copies up to" : {
+
+    },
+    "Keep in the rotation" : {
+
+    },
+    "Keep the current queue order" : {
+
+    },
+    "Kept %lld tracks" : {
+
+    },
+    "Kept 1 track" : {
+
+    },
+    "Kind" : {
+
+    },
+    "Last Played" : {
+
+    },
+    "Last played on %@" : {
+
+    },
+    "Last played today" : {
+
+    },
+    "Last played yesterday" : {
+
+    },
+    "Latest %lld episodes" : {
+
+    },
+    "Latest completed sync" : {
+
+    },
+    "Latest episode" : {
+
+    },
+    "Left against right, so you can see the stereo image." : {
+
+    },
+    "Less" : {
+
+    },
+    "Library" : {
+
+    },
+    "Library folder couldn’t be selected" : {
+
+    },
+    "Library scan canceled — rescan to use the library" : {
+
+    },
+    "Library: %lld songs. iPod: %lld songs." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Library: %1$lld songs. iPod: %2$lld songs."
+          }
+        }
+      }
+    },
+    "Linking %lld/%lld: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Linking %1$lld/%2$lld: %3$@"
+          }
+        }
+      }
+    },
+    "Listening" : {
+
+    },
+    "Listening History Couldn’t Be Changed" : {
+
+    },
+    "Listening history couldn’t be saved" : {
+
+    },
+    "Listening section" : {
+
+    },
+    "Loaded from the visualizers folder" : {
+
+    },
+    "Loading a show or downloading an episode contacts that show's publisher directly, like any podcast app." : {
+
+    },
+    "Loading episodes…" : {
+
+    },
+    "Loading songs from %@…" : {
+
+    },
+    "Location" : {
+
+    },
+    "Look Up" : {
+
+    },
+    "Look Up Album…" : {
+
+    },
+    "Look Up Anyway" : {
+
+    },
+    "Look Up on MusicBrainz…" : {
+
+    },
+    "Look for added, changed, and removed songs" : {
+
+    },
+    "Look up metadata online?" : {
+
+    },
+    "Look up song metadata on MusicBrainz" : {
+
+    },
+    "Looking up albums in the background" : {
+
+    },
+    "Looks for a new version right away, whatever the setting above says." : {
+
+    },
+    "Looks once a day and tells you when a new version is ready." : {
+
+    },
+    "Lookups match your songs against MusicBrainz, a community-maintained music encyclopedia, to fill in missing or incorrect tags (like titles, artists, albums, track numbers, and release years). Start one from a song's info editor or an album's Look Up action, or let automatic lookup match albums after each library scan. Suggested changes wait in the Suggestions inbox until you approve them." : {
+
+    },
+    "Lyrics" : {
+
+    },
+    "MINT" : {
+
+    },
+    "MINT VFD" : {
+
+    },
+    "MPEG audio file" : {
+
+    },
+    "Make Default" : {
+
+    },
+    "Make Nightdrive Your Default Music Player?" : {
+
+    },
+    "Make Nightdrive the default for every supported audio format." : {
+
+    },
+    "Make primary genre" : {
+
+    },
+    "Mark as Audiobook" : {
+
+    },
+    "Mark as Song" : {
+
+    },
+    "Mark songs with the heart button to see them here." : {
+
+    },
+    "Match all of these (leave a row empty to skip it)" : {
+
+    },
+    "Match the selected songs against a MusicBrainz release" : {
+
+    },
+    "Match this album's songs against a MusicBrainz release" : {
+
+    },
+    "Matches albums missing tags after each library scan." : {
+
+    },
+    "Matches found by automatic lookup." : {
+
+    },
+    "Matching audio has different tags" : {
+
+    },
+    "Matching tags" : {
+
+    },
+    "Medium confidence" : {
+
+    },
+    "Membership follows the rules" : {
+
+    },
+    "Merge Play Counts" : {
+
+    },
+    "Merged playlist \"%@\": %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Merged playlist \"%1$@\": %2$@"
+          }
+        }
+      }
+    },
+    "MetaBrainz privacy policy" : {
+
+    },
+    "Metadata Lookup" : {
+
+    },
+    "Metadata editing is available for MP3 and MPEG-4 (M4A/M4B) files, not %@." : {
+
+    },
+    "Metadata lookup powered by MusicBrainz, operated by the MetaBrainz Foundation." : {
+
+    },
+    "More" : {
+
+    },
+    "Motors the fold-down display open as soon as Nightdrive starts." : {
+
+    },
+    "Mouse & Trackpad" : {
+
+    },
+    "Move %lld Files" : {
+
+    },
+    "Move %lld Files to Trash" : {
+
+    },
+    "Move %lld Songs to Trash" : {
+
+    },
+    "Move %lld Songs to Trash?" : {
+
+    },
+    "Move %lld Songs to Trash…" : {
+
+    },
+    "Move 1 File" : {
+
+    },
+    "Move 1 File to Trash" : {
+
+    },
+    "Move 1 Song to Trash" : {
+
+    },
+    "Move Songs to Trash" : {
+
+    },
+    "Move songs into a consistent folder layout" : {
+
+    },
+    "Move the out-of-place file to Trash" : {
+
+    },
+    "Move the selection" : {
+
+    },
+    "Move this copy to the Trash" : {
+
+    },
+    "Move to Trash" : {
+
+    },
+    "Move “%@” to Trash?" : {
+
+    },
+    "Multiple Values" : {
+
+    },
+    "Music" : {
+
+    },
+    "Music Collection" : {
+
+    },
+    "Music Library" : {
+
+    },
+    "Music folder, %@" : {
+
+    },
+    "MusicBrainz" : {
+
+    },
+    "MusicBrainz IDs" : {
+
+    },
+    "MusicBrainz allows one request per second, so large lookups take a moment." : {
+
+    },
+    "MusicBrainz answered with HTTP %lld. Try again in a moment." : {
+
+    },
+    "MusicBrainz found no release matching this album's artist and title." : {
+
+    },
+    "MusicBrainz found nothing for this song's artist and title." : {
+
+    },
+    "MusicBrainz is Turned Off" : {
+
+    },
+    "MusicBrainz is an open music encyclopedia run by the MetaBrainz Foundation, a California non-profit." : {
+
+    },
+    "MusicBrainz metadata lookup is turned off." : {
+
+    },
+    "Mute" : {
+
+    },
+    "Mute or Unmute" : {
+
+    },
+    "Mute or unmute" : {
+
+    },
+    "NIGHTDRIVE" : {
+
+    },
+    "NO DISC" : {
+
+    },
+    "NO DISC  -  NIGHTDRIVE  -  READY" : {
+
+    },
+    "NO MATCHES" : {
+
+    },
+    "Name" : {
+
+    },
+    "Navigation" : {
+
+    },
+    "Never delete older episodes" : {
+
+    },
+    "Never your listening" : {
+
+    },
+    "Never your music" : {
+
+    },
+    "New Playlist" : {
+
+    },
+    "New Playlist…" : {
+
+    },
+    "New Smart Playlist" : {
+
+    },
+    "Next" : {
+
+    },
+    "Next Equalizer Preset" : {
+
+    },
+    "Next Nightdrive Track" : {
+
+    },
+    "Next Track" : {
+
+    },
+    "Next Visualizer" : {
+
+    },
+    "Next equalizer preset" : {
+
+    },
+    "Next track" : {
+
+    },
+    "Next visualizer" : {
+
+    },
+    "Next: %@" : {
+
+    },
+    "Nightdrive can search MusicBrainz, an open, non-profit music encyclopedia, for better tags." : {
+
+    },
+    "Nightdrive changed some file associations, but not all of them." : {
+
+    },
+    "Nightdrive could not read %@. The file was left unchanged. %@ (%@)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Nightdrive could not read %1$@. The file was left unchanged. %2$@ (%3$@)"
+          }
+        }
+      }
+    },
+    "Nightdrive couldn’t change any file associations." : {
+
+    },
+    "Nightdrive does not know how to update album artwork on this iPod model." : {
+
+    },
+    "Nightdrive is made possible in part by these projects and services." : {
+
+    },
+    "Nightdrive is not ready yet. Try again in a moment." : {
+
+    },
+    "Nightdrive is the default music player" : {
+
+    },
+    "Nightdrive isn’t the default music player" : {
+
+    },
+    "Nightdrive on GitHub" : {
+
+    },
+    "Nightdrive opens some audio formats by default" : {
+
+    },
+    "Nightdrive scans this folder for common audio formats. Syncing copies compatible songs in both directions." : {
+
+    },
+    "Nightdrive suggests dropping the %lld lowest-rated, least-recently-played songs (%@…)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Nightdrive suggests dropping the %1$lld lowest-rated, least-recently-played songs (%2$@…)."
+          }
+        }
+      }
+    },
+    "Nightdrive suggests dropping the %lld lowest-rated, least-recently-played songs." : {
+
+    },
+    "Nightdrive suggests dropping the lowest-rated, least-recently-played song (%@…)." : {
+
+    },
+    "Nightdrive suggests dropping the lowest-rated, least-recently-played song." : {
+
+    },
+    "Nightdrive will start over with %@ empty." : {
+
+    },
+    "Nightdrive’s music library is unavailable." : {
+
+    },
+    "No" : {
+
+    },
+    "No %@" : {
+
+    },
+    "No Episodes" : {
+
+    },
+    "No Favorites" : {
+
+    },
+    "No Mode Selected" : {
+
+    },
+    "No Playlist Selected" : {
+
+    },
+    "No Playlists" : {
+
+    },
+    "No Recent Audio" : {
+
+    },
+    "No Results for “%@”" : {
+
+    },
+    "No Show Selected" : {
+
+    },
+    "No Subscriptions" : {
+
+    },
+    "No Suggestions" : {
+
+    },
+    "No Sync Issues" : {
+
+    },
+    "No automatic correction — the evidence is not strong enough to supply values safely." : {
+
+    },
+    "No duplicates found." : {
+
+    },
+    "No folder chosen yet" : {
+
+    },
+    "No folder selected" : {
+
+    },
+    "No folders — files move to the top level" : {
+
+    },
+    "No genre tags need review." : {
+
+    },
+    "No match on this release" : {
+
+    },
+    "No matches" : {
+
+    },
+    "No modes match" : {
+
+    },
+    "No releases found" : {
+
+    },
+    "No shows matched “%@”." : {
+
+    },
+    "No songs" : {
+
+    },
+    "No songs were moved to Trash." : {
+
+    },
+    "No suspicious metadata found." : {
+
+    },
+    "No system audio output is available. Playback is paused." : {
+
+    },
+    "None" : {
+
+    },
+    "Not enough free space on %@ — the planned copies are %@ over. Trim the sync or free up space." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Not enough free space on %1$@ — the planned copies are %2$@ over. Trim the sync or free up space."
+          }
+        }
+      }
+    },
+    "Not enough free space on the iPod: need %@, have %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Not enough free space on the iPod: need %1$@, have %2$@."
+          }
+        }
+      }
+    },
+    "Not on iPod" : {
+
+    },
+    "Not syncing: over capacity. Re-run with --trim to drop the suggested songs." : {
+
+    },
+    "Not syncing: still %@ over capacity after trimming." : {
+
+    },
+    "Nothing Played Yet" : {
+
+    },
+    "Nothing Playing" : {
+
+    },
+    "Nothing else is queued." : {
+
+    },
+    "Nothing is written to your files until you approve it." : {
+
+    },
+    "Nothing to change" : {
+
+    },
+    "Now Playing" : {
+
+    },
+    "Now Playing: %@" : {
+
+    },
+    "OK" : {
+
+    },
+    "Off" : {
+
+    },
+    "Older conversions are removed first once the cache fills." : {
+
+    },
+    "On the deck now" : {
+
+    },
+    "One copy always stays — uncheck another copy to remove this one" : {
+
+    },
+    "One-way (Library to iPod)" : {
+
+    },
+    "One-way (iPod to Library)" : {
+
+    },
+    "Online" : {
+
+    },
+    "Online Settings…" : {
+
+    },
+    "Online lookups are currently turned off in Settings → Online. Turning them on lets Nightdrive search MusicBrainz when you ask it to." : {
+
+    },
+    "Online metadata lookups are turned off. Enable them in Settings → Online first." : {
+
+    },
+    "Only %@" : {
+
+    },
+    "Only search terms" : {
+
+    },
+    "Only tag text" : {
+
+    },
+    "Only the Selected Mode" : {
+
+    },
+    "Only the artist, album, and song title tags are sent." : {
+
+    },
+    "Only the checked fields will be written. Nightdrive will preserve all other metadata and will not rename or move any files." : {
+
+    },
+    "Only the starred genre will be saved." : {
+
+    },
+    "Open" : {
+
+    },
+    "Open %@" : {
+
+    },
+    "Open Audio Files…" : {
+
+    },
+    "Open Deck Display" : {
+
+    },
+    "Open General settings" : {
+
+    },
+    "Open Music in Nightdrive" : {
+
+    },
+    "Open Online Settings" : {
+
+    },
+    "Open Podcasts" : {
+
+    },
+    "Open Recent" : {
+
+    },
+    "Open Up Next" : {
+
+    },
+    "Open Up Next in Nightdrive" : {
+
+    },
+    "Open Visualizers Folder…" : {
+
+    },
+    "Open audio files" : {
+
+    },
+    "Open iPod Sync settings" : {
+
+    },
+    "Open or close the deck display" : {
+
+    },
+    "Open playlist · %@" : {
+
+    },
+    "Open podcast" : {
+
+    },
+    "Open the Suggestions inbox" : {
+
+    },
+    "Open the command palette" : {
+
+    },
+    "Open the deck at launch" : {
+
+    },
+    "Open the selected result" : {
+
+    },
+    "Organize Library Files" : {
+
+    },
+    "Organize Library Files…" : {
+
+    },
+    "Other %@" : {
+
+    },
+    "Other files in this folder consistently use filenames that agree with their titles." : {
+
+    },
+    "Other numbered files in this folder agree with their embedded disc and track numbers." : {
+
+    },
+    "Other tags found" : {
+
+    },
+    "Output device" : {
+
+    },
+    "PEAK" : {
+
+    },
+    "PK" : {
+
+    },
+    "PLASMA" : {
+
+    },
+    "PLASMA VIOLET" : {
+
+    },
+    "PLAYER" : {
+
+    },
+    "Part of a compilation" : {
+
+    },
+    "Partial audio match" : {
+
+    },
+    "Pause" : {
+
+    },
+    "Pause the current song" : {
+
+    },
+    "Pick a mode on the left to see what it looks like." : {
+
+    },
+    "Pick the folder your music lives in to get started." : {
+
+    },
+    "Picked up %lld plays from %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Picked up %1$lld plays from %2$@"
+          }
+        }
+      }
+    },
+    "Picked up 1 play from %@" : {
+
+    },
+    "Planned copies are %@ over the iPod's free space. Suggested trim (lowest-rated, least-recently-played first):" : {
+
+    },
+    "Planning moves for %lld songs…" : {
+
+    },
+    "Play" : {
+
+    },
+    "Play All" : {
+
+    },
+    "Play Music" : {
+
+    },
+    "Play Music in Nightdrive" : {
+
+    },
+    "Play Next" : {
+
+    },
+    "Play Now" : {
+
+    },
+    "Play Selection" : {
+
+    },
+    "Play files without adding them to the library" : {
+
+    },
+    "Play it" : {
+
+    },
+    "Play or Pause" : {
+
+    },
+    "Play or Pause Nightdrive" : {
+
+    },
+    "Play or pause" : {
+
+    },
+    "Play this episode" : {
+
+    },
+    "Playback" : {
+
+    },
+    "Playback Couldn’t Start" : {
+
+    },
+    "Playback Issue" : {
+
+    },
+    "Playback Speed" : {
+
+    },
+    "Playback issue" : {
+
+    },
+    "Played" : {
+
+    },
+    "Played at least (times)" : {
+
+    },
+    "Played on iPod" : {
+
+    },
+    "Played on the glass the first time the deck opens." : {
+
+    },
+    "Played, playing, and queued songs" : {
+
+    },
+    "Playlist" : {
+
+    },
+    "Playlist Couldn’t Be Changed" : {
+
+    },
+    "Playlist changes could not be fully saved: %@" : {
+
+    },
+    "Playlist changes were kept for the next sync (%@)." : {
+
+    },
+    "Playlist changes: %lld" : {
+
+    },
+    "Playlist name" : {
+
+    },
+    "Playlists" : {
+
+    },
+    "Plays" : {
+
+    },
+    "Plugin" : {
+
+    },
+    "Plugins" : {
+
+    },
+    "Podcast" : {
+
+    },
+    "Podcasts" : {
+
+    },
+    "Podcasts are Turned Off" : {
+
+    },
+    "Points that find each other and draw the lines between them." : {
+
+    },
+    "Popular" : {
+
+    },
+    "Preparing audio comparison…" : {
+
+    },
+    "Preparing deep search…" : {
+
+    },
+    "Preparing shallow search…" : {
+
+    },
+    "Preparing sync preview…" : {
+
+    },
+    "Preparing…" : {
+
+    },
+    "Preserved the unreadable sync ledger at %@; starting with an empty ledger." : {
+
+    },
+    "Preserving damaged sync ledger…" : {
+
+    },
+    "Presets" : {
+
+    },
+    "Press Return to confirm this genre" : {
+
+    },
+    "Preview of %@ on the %@ tube" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preview of %1$@ on the %2$@ tube"
+          }
+        }
+      }
+    },
+    "Previous" : {
+
+    },
+    "Previous Nightdrive Track" : {
+
+    },
+    "Previous Track" : {
+
+    },
+    "Previous copy was not found for removal (%@)." : {
+
+    },
+    "Previous copy was not removed (%@)." : {
+
+    },
+    "Previous track" : {
+
+    },
+    "Previously selected device (unavailable)" : {
+
+    },
+    "Primary genre sent to iPod" : {
+
+    },
+    "Proposed correction" : {
+
+    },
+    "Put Every Mode in Rotation" : {
+
+    },
+    "Put in Rotation" : {
+
+    },
+    "Put this mode on the deck's glass and fold the deck open" : {
+
+    },
+    "Queue %@" : {
+
+    },
+    "Queue Couldn’t Be Saved" : {
+
+    },
+    "Queue Is Empty" : {
+
+    },
+    "READY" : {
+
+    },
+    "REMAIN" : {
+
+    },
+    "Randomize upcoming songs" : {
+
+    },
+    "Rating" : {
+
+    },
+    "Rating at least" : {
+
+    },
+    "Re-run with --confirm to reset it." : {
+
+    },
+    "Read only: %@" : {
+
+    },
+    "Read the" : {
+
+    },
+    "Reading metadata for %lld of %lld songs…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Reading metadata for %1$lld of %2$lld songs…"
+          }
+        }
+      }
+    },
+    "Reading metadata for 1 song…" : {
+
+    },
+    "Ready to search %lld songs." : {
+
+    },
+    "Reattach Faceplate" : {
+
+    },
+    "Reattach the detached faceplate" : {
+
+    },
+    "Rebuild Database" : {
+
+    },
+    "Rebuild the iPod's database from the audio files on the device" : {
+
+    },
+    "Reconciling playlists…" : {
+
+    },
+    "Reconstruct Metadata" : {
+
+    },
+    "Redraws from the audio signal and stays still when playback stops." : {
+
+    },
+    "Refreshed smart playlist membership." : {
+
+    },
+    "Refreshes your subscribed shows shortly after Nightdrive opens." : {
+
+    },
+    "Release decade, like 1990s" : {
+
+    },
+    "Release to add the audio files and folders to Up Next" : {
+
+    },
+    "Release to play the audio files and folders" : {
+
+    },
+    "Release year" : {
+
+    },
+    "Reload" : {
+
+    },
+    "Reload Plugins" : {
+
+    },
+    "Remove" : {
+
+    },
+    "Remove %@" : {
+
+    },
+    "Remove %lld & Sync" : {
+
+    },
+    "Remove Artwork" : {
+
+    },
+    "Remove from Favorites" : {
+
+    },
+    "Remove from Playlist" : {
+
+    },
+    "Remove from Queue" : {
+
+    },
+    "Remove from iPod" : {
+
+    },
+    "Removed playlist \"%@\" from the iPod" : {
+
+    },
+    "Removed playlist \"%@\" from the library" : {
+
+    },
+    "Removing %lld songs not in the library from the iPod." : {
+
+    },
+    "Removing %lld songs not in this sync from the iPod." : {
+
+    },
+    "Removing 1 song not in the library from the iPod." : {
+
+    },
+    "Removing 1 song not in this sync from the iPod." : {
+
+    },
+    "Removing from iPod: %@" : {
+
+    },
+    "Rename" : {
+
+    },
+    "Rename Playlist" : {
+
+    },
+    "Rename files to “01 Title.mp3”" : {
+
+    },
+    "Rename the out-of-place file" : {
+
+    },
+    "Rename this iPod (the name is remembered by Nightdrive)" : {
+
+    },
+    "Renamed to avoid a conflict" : {
+
+    },
+    "Rename…" : {
+
+    },
+    "Repair Database…" : {
+
+    },
+    "Repair failed: %@" : {
+
+    },
+    "Repair it (or reset it with Nightdrive's reset-sidecar command) before syncing or saving library data." : {
+
+    },
+    "Repair it, or explicitly start with an empty sync ledger. Starting empty can duplicate copies and change which songs are eligible for removal." : {
+
+    },
+    "Repair the database on %@?" : {
+
+    },
+    "Repairing %@…" : {
+
+    },
+    "Repeat All" : {
+
+    },
+    "Repeat Off" : {
+
+    },
+    "Repeat One" : {
+
+    },
+    "Rescan" : {
+
+    },
+    "Rescan Library" : {
+
+    },
+    "Rescan library" : {
+
+    },
+    "Reset %@." : {
+
+    },
+    "Reset Play Statistics" : {
+
+    },
+    "Reset the Running Order" : {
+
+    },
+    "Resetting it permanently discards %@." : {
+
+    },
+    "Restore access to it — check permissions and that its volume is available — then try again." : {
+
+    },
+    "Restore audio output" : {
+
+    },
+    "Restoring shuffle play-order file…" : {
+
+    },
+    "Result" : {
+
+    },
+    "Resume playback" : {
+
+    },
+    "Retry" : {
+
+    },
+    "Return" : {
+
+    },
+    "Return to the previous song" : {
+
+    },
+    "Review %lld songs in %lld repeated tag patterns. %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Review %1$lld songs in %2$lld repeated tag patterns. %3$@"
+          }
+        }
+      }
+    },
+    "Review %lld songs in 1 repeated tag pattern. %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Review %1$lld songs in 1 repeated tag pattern. %2$@"
+          }
+        }
+      }
+    },
+    "Review 1 song in %lld repeated tag patterns. %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Review 1 song in %1$lld repeated tag patterns. %2$@"
+          }
+        }
+      }
+    },
+    "Review 1 song in 1 repeated tag pattern. %@" : {
+
+    },
+    "Review and normalize genre tags" : {
+
+    },
+    "Review in Song Info…" : {
+
+    },
+    "Review metadata suggestions" : {
+
+    },
+    "Right-click the deck" : {
+
+    },
+    "Rotation and plugin actions" : {
+
+    },
+    "Rules: %@" : {
+
+    },
+    "Rules…" : {
+
+    },
+    "Runs on its own clock, with the audio pushing it along." : {
+
+    },
+    "SEARCH" : {
+
+    },
+    "SEARCH NIGHTDRIVE" : {
+
+    },
+    "SEC" : {
+
+    },
+    "SONG" : {
+
+    },
+    "STANDBY · INSERT DISC" : {
+
+    },
+    "Sample Rate" : {
+
+    },
+    "Save" : {
+
+    },
+    "Save Changes" : {
+
+    },
+    "Save Playlists" : {
+
+    },
+    "Save Queue as Playlist" : {
+
+    },
+    "Save Sync Ledger" : {
+
+    },
+    "Save as Playlist…" : {
+
+    },
+    "Saved library data appeared outside Nightdrive. Reload the library before saving more changes." : {
+
+    },
+    "Saved library data changed outside Nightdrive. Reload the library before saving more changes." : {
+
+    },
+    "Saved library data could not be read and was left unchanged. Restore access to the library folder — check permissions and that its volume is available — and reload the library before making changes. (%@)" : {
+
+    },
+    "Saved library data could not be read. Restore access to the library folder and reload the library before saving more changes." : {
+
+    },
+    "Saved library data is damaged and was left unchanged. Repair its sidecar (or reset it with Nightdrive's reset-sidecar command) and reload the library before making changes. (%@)" : {
+
+    },
+    "Saved song sync for this iPod: %@" : {
+
+    },
+    "Saved sync scope for this iPod: %@" : {
+
+    },
+    "Saving library index…" : {
+
+    },
+    "Scan canceled. Rescan before syncing or editing the library." : {
+
+    },
+    "Scanning %lld songs without changing files…" : {
+
+    },
+    "Scanning %lld songs…" : {
+
+    },
+    "Scanning genre tags…" : {
+
+    },
+    "Scope excludes %lld library songs from this iPod." : {
+
+    },
+    "Scope excludes 1 library song from this iPod." : {
+
+    },
+    "Scrub through the current track" : {
+
+    },
+    "Search" : {
+
+    },
+    "Search MusicBrainz for this song and review the proposed tags" : {
+
+    },
+    "Search Podcasts" : {
+
+    },
+    "Search and download podcasts" : {
+
+    },
+    "Search complete" : {
+
+    },
+    "Search depth" : {
+
+    },
+    "Search for Album" : {
+
+    },
+    "Search for Artist" : {
+
+    },
+    "Search for a show and subscribe. Downloaded episodes join your library and sync to your iPod's Podcasts menu." : {
+
+    },
+    "Search modes" : {
+
+    },
+    "Search songs" : {
+
+    },
+    "Search visualizer modes" : {
+
+    },
+    "Searching MusicBrainz…" : {
+
+    },
+    "Searching and the Popular list contact Apple's podcast directory with your search text — nothing about your library." : {
+
+    },
+    "Searching…" : {
+
+    },
+    "Secure application updates for macOS." : {
+
+    },
+    "Seeded demo library and fake iPod shuffle." : {
+
+    },
+    "Seeded demo library and fake iPod." : {
+
+    },
+    "Select Nightdrive’s music folder" : {
+
+    },
+    "Select one or more songs to edit" : {
+
+    },
+    "Select only the corrections you want to apply." : {
+
+    },
+    "Select the checkbox beside each field you want to change. Unselected fields stay exactly as they are." : {
+
+    },
+    "Select this correction for the final confirmation step" : {
+
+    },
+    "Selected Device (Unavailable)" : {
+
+    },
+    "Selected library songs are in sync" : {
+
+    },
+    "Separating genres from other tags…" : {
+
+    },
+    "Settings (⌘1 – ⌘%lld pick a tab there)" : {
+
+    },
+    "Settings panes" : {
+
+    },
+    "Shallow" : {
+
+    },
+    "Show" : {
+
+    },
+    "Show Latest Sync Details" : {
+
+    },
+    "Show Nightdrive" : {
+
+    },
+    "Show Sync Error Details" : {
+
+    },
+    "Show Up Next" : {
+
+    },
+    "Show favorites and listening history" : {
+
+    },
+    "Show in Finder" : {
+
+    },
+    "Show on the Deck" : {
+
+    },
+    "Show only built-in modes or plugins" : {
+
+    },
+    "Show the playback queue" : {
+
+    },
+    "Showing on the deck now" : {
+
+    },
+    "Shows are found through Apple's podcast directory, and episodes download straight from each publisher's feed. Downloaded episodes join your library and sync to your iPod's Podcasts menu." : {
+
+    },
+    "Shuffle Off" : {
+
+    },
+    "Shuffle On" : {
+
+    },
+    "Silence audio output" : {
+
+    },
+    "Simulated crash before playback merge." : {
+
+    },
+    "Size" : {
+
+    },
+    "Skip to the next song" : {
+
+    },
+    "Skipped “%@” because it could not be played. %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Skipped “%1$@” because it could not be played. %2$@"
+          }
+        }
+      }
+    },
+    "Some File Associations Couldn’t Be Changed" : {
+
+    },
+    "Some selected songs are no longer in the library" : {
+
+    },
+    "Song" : {
+
+    },
+    "Song %lld of %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Song %1$lld of %2$lld"
+          }
+        }
+      }
+    },
+    "Song sync: %@" : {
+
+    },
+    "Song title" : {
+
+    },
+    "Songs appear here after playback is recorded." : {
+
+    },
+    "Songs with %@ metadata will appear here." : {
+
+    },
+    "Songs: %@" : {
+
+    },
+    "Sorting songs…" : {
+
+    },
+    "Source file could not be read from the iPod (%@)." : {
+
+    },
+    "Source file is missing on the iPod." : {
+
+    },
+    "Space" : {
+
+    },
+    "Sparkle" : {
+
+    },
+    "Start a sync automatically whenever this iPod appears" : {
+
+    },
+    "Stop" : {
+
+    },
+    "Stop following this show; downloaded episodes stay in your library" : {
+
+    },
+    "Streaks pulled to a vanishing point, stretched by the beat." : {
+
+    },
+    "Subscribe" : {
+
+    },
+    "Subscriptions" : {
+
+    },
+    "Subscriptions, downloads, and playback history never leave this Mac." : {
+
+    },
+    "Suggested" : {
+
+    },
+    "Suggested copy to keep — highest quality in the tidiest location" : {
+
+    },
+    "Suggested copy to keep — longest recording, then highest quality" : {
+
+    },
+    "Suggestions" : {
+
+    },
+    "Supported audio files open here when you double-click them." : {
+
+    },
+    "Supported audio files you double-click in Finder will open in Nightdrive. macOS may ask you to confirm each audio format. You can change this later in Settings." : {
+
+    },
+    "Switch to the next visualizer" : {
+
+    },
+    "Sync" : {
+
+    },
+    "Sync %@?" : {
+
+    },
+    "Sync Complete" : {
+
+    },
+    "Sync Completed with Issues" : {
+
+    },
+    "Sync Rules" : {
+
+    },
+    "Sync Scope" : {
+
+    },
+    "Sync Without Removing" : {
+
+    },
+    "Sync iPod" : {
+
+    },
+    "Sync ledger couldn’t be read" : {
+
+    },
+    "Sync off" : {
+
+    },
+    "Sync scope: %@" : {
+
+    },
+    "Sync settings couldn’t be saved" : {
+
+    },
+    "Sync the selected or first connected iPod" : {
+
+    },
+    "Sync to iPod" : {
+
+    },
+    "Sync when connected" : {
+
+    },
+    "Sync, Dropping %lld Songs" : {
+
+    },
+    "Sync, Dropping 1 Song" : {
+
+    },
+    "Sync: %@" : {
+
+    },
+    "Synced" : {
+
+    },
+    "Syncing album art…" : {
+
+    },
+    "System Default" : {
+
+    },
+    "System Default — %@" : {
+
+    },
+    "TOOL" : {
+
+    },
+    "Tagged" : {
+
+    },
+    "Tags duplicated from another file" : {
+
+    },
+    "Take Out of Rotation" : {
+
+    },
+    "Tempo, like 123 BPM" : {
+
+    },
+    "That music collection is empty or no longer exists." : {
+
+    },
+    "That playlist no longer exists." : {
+
+    },
+    "The Deck" : {
+
+    },
+    "The MP3 changed on disk while it was being edited and was not changed." : {
+
+    },
+    "The MP3 has a malformed ID3 tag and was not changed." : {
+
+    },
+    "The MPEG-4 container is malformed and was not changed." : {
+
+    },
+    "The MPEG-4 file changed on disk while it was being edited and was not changed." : {
+
+    },
+    "The Sparkle license could not be loaded." : {
+
+    },
+    "The artwork or metadata is too large for this MP3's ID3 tag and was not changed." : {
+
+    },
+    "The artwork or metadata is too large for this file and it was not changed." : {
+
+    },
+    "The audio could not be converted: %@" : {
+
+    },
+    "The audio file contains no playable samples." : {
+
+    },
+    "The audio file could not be decoded." : {
+
+    },
+    "The audio file does not contain a trustworthy duration." : {
+
+    },
+    "The audio format is not recognized." : {
+
+    },
+    "The converted-audio cache could not read %@ for %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The converted-audio cache could not read %1$@ for %2$@."
+          }
+        }
+      }
+    },
+    "The copied audio could not be identified before it was published." : {
+
+    },
+    "The damaged file was kept at %@." : {
+
+    },
+    "The damaged file would be kept at %@ for manual repair." : {
+
+    },
+    "The damaged sync ledger was preserved. Review the refreshed sync settings, then sync again." : {
+
+    },
+    "The deck folds down under the head unit and shows whichever mode is on the glass. Head units of the era greeted their owner at power-on; the glass writes the greeting in capitals, up to %lld characters, once per launch." : {
+
+    },
+    "The deck will skip past this one." : {
+
+    },
+    "The destination is outside the library folder." : {
+
+    },
+    "The downloaded file could not be decoded as audio." : {
+
+    },
+    "The downloaded file does not contain playable audio." : {
+
+    },
+    "The encoded audio payload exactly matches “%@,” whose filename and title agree." : {
+
+    },
+    "The equalizer curve a thirteen-band deck drew while you nudged the sliders." : {
+
+    },
+    "The feed could not be read as podcast RSS." : {
+
+    },
+    "The feed does not contain a podcast channel." : {
+
+    },
+    "The file at the conflicting destination changed." : {
+
+    },
+    "The file contains no decodable audio track." : {
+
+    },
+    "The file does not contain playable audio." : {
+
+    },
+    "The file is already at the destination." : {
+
+    },
+    "The iPod database could not be repaired (%@), and the original database could not be restored from %@ (%@)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The iPod database could not be repaired (%1$@), and the original database could not be restored from %2$@ (%3$@)."
+          }
+        }
+      }
+    },
+    "The iPod database write reported an error (%@), and the matching artwork generation could not be resolved safely (%@). Recovery files remain at %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The iPod database write reported an error (%1$@), and the matching artwork generation could not be resolved safely (%2$@). Recovery files remain at %3$@"
+          }
+        }
+      }
+    },
+    "The iPod metadata update failed (%@), and the original audio could not be fully restored (%@)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The iPod metadata update failed (%1$@), and the original audio could not be fully restored (%2$@)."
+          }
+        }
+      }
+    },
+    "The iPod's existing album artwork cannot be updated safely." : {
+
+    },
+    "The inks every mode draws in." : {
+
+    },
+    "The intended metadata was not readable from the file after writing." : {
+
+    },
+    "The library folder changed before sync started. Review the new library and sync again." : {
+
+    },
+    "The library folder changed during sync. Local changes were left for the next sync." : {
+
+    },
+    "The library volume did not report its available space." : {
+
+    },
+    "The library volume's available space could not be checked." : {
+
+    },
+    "The music library changed. Wait for the new folder to finish scanning, then try again." : {
+
+    },
+    "The music library folder cannot be read. Restore access, then rescan." : {
+
+    },
+    "The music library folder is unavailable. Reconnect or restore it, then rescan." : {
+
+    },
+    "The music library folder was replaced. Choose it again to use the replacement." : {
+
+    },
+    "The planned copies are %@ over %@’s free space. %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The planned copies are %1$@ over %2$@’s free space. %3$@"
+          }
+        }
+      }
+    },
+    "The playlist contains a non-local entry that can’t be imported: %@" : {
+
+    },
+    "The playlist doesn’t contain any local music files." : {
+
+    },
+    "The playlist isn’t a valid UTF-8 M3U file." : {
+
+    },
+    "The playlist “%@” is removed from the library. Its songs stay." : {
+
+    },
+    "The podcast download could not be recorded." : {
+
+    },
+    "The podcast download path is unsafe." : {
+
+    },
+    "The podcast download record at %@ contains an unsafe file path. Restore or remove that file before changing podcast downloads." : {
+
+    },
+    "The podcast response exceeds Nightdrive's %@ limit." : {
+
+    },
+    "The previous output disconnected, so playback was paused." : {
+
+    },
+    "The replacement album artwork could not be decoded." : {
+
+    },
+    "The same song appears on different albums; review before removing." : {
+
+    },
+    "The selected audio output is no longer connected. Playback is paused." : {
+
+    },
+    "The selected audio output is unavailable." : {
+
+    },
+    "The selected file is not an MP3." : {
+
+    },
+    "The selected file is not an MPEG-4 audio file." : {
+
+    },
+    "The selected library folder is unavailable or is reached through a broken or cyclic symbolic link: %@" : {
+
+    },
+    "The selected music library path is no longer a folder. Restore it, then rescan." : {
+
+    },
+    "The server answered with HTTP %lld." : {
+
+    },
+    "The server returned %@ instead of an audio file." : {
+
+    },
+    "The server returned an invalid Content-Length." : {
+
+    },
+    "The spectrum scrolling away from you, so you can see what just happened." : {
+
+    },
+    "The sync ledger could not be preserved: %@" : {
+
+    },
+    "The sync plan changed after it was confirmed — nothing was deleted. Review the plan and sync again." : {
+
+    },
+    "The track couldn’t be changed" : {
+
+    },
+    "The track name crawling by in a dot-matrix, the way a deck spelled it out." : {
+
+    },
+    "The volume did not report its available capacity." : {
+
+    },
+    "There are no metadata changes to review. New suggestions appear after your library is scanned." : {
+
+    },
+    "There is not enough free space to download this episode while preserving %@ of disk headroom." : {
+
+    },
+    "There isn't enough tagged metadata to search with. Add an artist or title first." : {
+
+    },
+    "These files are byte-for-byte identical." : {
+
+    },
+    "These files carry the same title, artist, album, and track position." : {
+
+    },
+    "These files carry the same title, artist, and album and have similar lengths, but their disc or track positions differ. The non-suggested copies are selected for removal." : {
+
+    },
+    "These files have matching song information but different lengths; the scan could not confirm overlapping audio." : {
+
+    },
+    "This copy will move to the Trash." : {
+
+    },
+    "This copy will stay in your library." : {
+
+    },
+    "This episode is a %@ file. Nightdrive downloads MP3 and M4A episodes only." : {
+
+    },
+    "This feed has no episodes." : {
+
+    },
+    "This file format does not support metadata editing in Nightdrive." : {
+
+    },
+    "This permanently removes the audio file from the iPod. If the song is still in your library, a later two-way sync may copy it back." : {
+
+    },
+    "This removes the audio file from your library. If the song is still on an iPod, a later two-way sync may copy it back." : {
+
+    },
+    "This removes the selected audio files from your library. Songs still on an iPod may be copied back by a later two-way sync." : {
+
+    },
+    "This saves the played, current, and upcoming songs in their queue order." : {
+
+    },
+    "This song's tags already match the selected recording." : {
+
+    },
+    "Thorough: also decodes candidate files to compare their audio." : {
+
+    },
+    "Time" : {
+
+    },
+    "Title" : {
+
+    },
+    "Title and artist identify tracks during sync. A differently tagged copy on the other side may sync as a separate track." : {
+
+    },
+    "To iPod: %lld, to library: %lld, updates: %lld, removals: %lld, local-only: %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "To iPod: %1$lld, to library: %2$lld, updates: %3$lld, removals: %4$lld, local-only: %5$lld"
+          }
+        }
+      }
+    },
+    "Toggle Shuffle" : {
+
+    },
+    "Toggle Sidebar" : {
+
+    },
+    "Toggle audio output" : {
+
+    },
+    "Toggle music playback in Nightdrive." : {
+
+    },
+    "Toggle playback" : {
+
+    },
+    "Track" : {
+
+    },
+    "Track %lld" : {
+
+    },
+    "Track Artist" : {
+
+    },
+    "Track Count" : {
+
+    },
+    "Track Skipped" : {
+
+    },
+    "Track number conflict" : {
+
+    },
+    "Transparent glenz solids tumbling the way the demos did it." : {
+
+    },
+    "Treat library song files and tags as authoritative; never copy songs from this iPod" : {
+
+    },
+    "Treble Boost" : {
+
+    },
+    "Trim %lld & Remove %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Trim %1$lld & Remove %2$lld"
+          }
+        }
+      }
+    },
+    "Trimmed %lld songs to fit." : {
+
+    },
+    "Trimmed 1 song to fit." : {
+
+    },
+    "Tube Color" : {
+
+    },
+    "Tube color" : {
+
+    },
+    "Turn Shuffle Off" : {
+
+    },
+    "Turn Shuffle On" : {
+
+    },
+    "Turn on MusicBrainz in Online settings to look up metadata for your library." : {
+
+    },
+    "Turn on automatic lookup in Online settings to fill this inbox." : {
+
+    },
+    "Turn on podcasts in Online settings to load this show's episodes." : {
+
+    },
+    "Turn on podcasts in Online settings to search for shows and download episodes." : {
+
+    },
+    "Turn shuffle on or off" : {
+
+    },
+    "Two-way" : {
+
+    },
+    "Type a genre and press Return" : {
+
+    },
+    "USB" : {
+
+    },
+    "Unexpected data in iTunesDB (%@)" : {
+
+    },
+    "Unknown" : {
+
+    },
+    "Unknown Album" : {
+
+    },
+    "Unknown Artist" : {
+
+    },
+    "Unknown Genre" : {
+
+    },
+    "Unknown track" : {
+
+    },
+    "Unmute" : {
+
+    },
+    "Unsubscribe" : {
+
+    },
+    "Unsupported audio format." : {
+
+    },
+    "Untitled Episode" : {
+
+    },
+    "Untitled Show" : {
+
+    },
+    "Up Next" : {
+
+    },
+    "Update %lld Songs" : {
+
+    },
+    "Update 1 Song" : {
+
+    },
+    "Update in Library" : {
+
+    },
+    "Update on iPod" : {
+
+    },
+    "Updated" : {
+
+    },
+    "Updated metadata could not be verified because the local file could not be read." : {
+
+    },
+    "Updated playlist \"%@\" in the library" : {
+
+    },
+    "Updated playlist \"%@\" on the iPod (%lld songs)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Updated playlist \"%1$@\" on the iPod (%2$lld songs)"
+          }
+        }
+      }
+    },
+    "Updated playlist \"%@\" on the iPod (1 song)" : {
+
+    },
+    "Updates" : {
+
+    },
+    "Updates are downloaded from the Nightdrive releases on GitHub and verified before they are installed." : {
+
+    },
+    "Updating iPod database…" : {
+
+    },
+    "Updating in library: %@" : {
+
+    },
+    "Updating on iPod: %@" : {
+
+    },
+    "Use Empty Ledger" : {
+
+    },
+    "Use Nightdrive when you double-click supported audio files." : {
+
+    },
+    "Use Playlists" : {
+
+    },
+    "Use Rules" : {
+
+    },
+    "Use These Values" : {
+
+    },
+    "Use as Library" : {
+
+    },
+    "VIEW" : {
+
+    },
+    "VU %@" : {
+
+    },
+    "Various Artists" : {
+
+    },
+    "Version %@" : {
+
+    },
+    "Version %@ (%@)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Version %1$@ (%2$@)"
+          }
+        }
+      }
+    },
+    "View %lld Recent Plays" : {
+
+    },
+    "View 1 Recent Play" : {
+
+    },
+    "Visit MusicBrainz" : {
+
+    },
+    "Visit the Sparkle project" : {
+
+    },
+    "Visualizer" : {
+
+    },
+    "Visualizer Settings…" : {
+
+    },
+    "Visualizer actions" : {
+
+    },
+    "Visualizer and tube color options" : {
+
+    },
+    "Visualizer plugins: %@" : {
+
+    },
+    "Visualizer preview size is outside the supported pixel budget." : {
+
+    },
+    "Visualizer, %@" : {
+
+    },
+    "Visualizers" : {
+
+    },
+    "Vocal" : {
+
+    },
+    "WAV audio file" : {
+
+    },
+    "What gets sent" : {
+
+    },
+    "When files conflict" : {
+
+    },
+    "When files conflict:" : {
+
+    },
+    "Whether the deck stops on this mode as it cycles" : {
+
+    },
+    "Which part of the library this iPod receives" : {
+
+    },
+    "Will move to Trash" : {
+
+    },
+    "Will sync %@" : {
+
+    },
+    "Write Album Art" : {
+
+    },
+    "Write the proposed tags to this album's files" : {
+
+    },
+    "Wrote album art for %lld tracks." : {
+
+    },
+    "Wrote album art for 1 track." : {
+
+    },
+    "XPLOD" : {
+
+    },
+    "XPLOD RED" : {
+
+    },
+    "Year" : {
+
+    },
+    "Year and album in one folder" : {
+
+    },
+    "Year from" : {
+
+    },
+    "Year – Album" : {
+
+    },
+    "Yes" : {
+
+    },
+    "Your audio files, file paths, and listening history never leave this Mac." : {
+
+    },
+    "Your genre tags already look tidy." : {
+
+    },
+    "Your own and smart playlists" : {
+
+    },
+    "added in the last %lld days" : {
+
+    },
+    "added in the last 1 day" : {
+
+    },
+    "album contains “%@”" : {
+
+    },
+    "all local playlists" : {
+
+    },
+    "all songs" : {
+
+    },
+    "any year" : {
+
+    },
+    "artist contains “%@”" : {
+
+    },
+    "artwork crash checkpoint was not reached" : {
+
+    },
+    "artwork crash fixture failed: %@" : {
+
+    },
+    "artwork crash fixture is incomplete" : {
+
+    },
+    "blank" : {
+
+    },
+    "cache clear failed: %@" : {
+
+    },
+    "could not create the plugin runtime" : {
+
+    },
+    "could not write cache-clear test marker: %@" : {
+
+    },
+    "databaseID: %@" : {
+
+    },
+    "deleted locally but changed on the iPod; re-imported" : {
+
+    },
+    "deleted on the iPod but changed locally; recreated on the iPod" : {
+
+    },
+    "display list exceeds its resource budget" : {
+
+    },
+    "display list exceeds its text budget" : {
+
+    },
+    "drew nothing" : {
+
+    },
+    "dropped %lld whose files are gone" : {
+
+    },
+    "dump failed: %@" : {
+
+    },
+    "edited on both sides; kept the local order and appended %lld songs added on the iPod" : {
+
+    },
+    "edited on both sides; kept the local order and appended 1 song added on the iPod" : {
+
+    },
+    "edited on both sides; kept the local version" : {
+
+    },
+    "favorite" : {
+
+    },
+    "format is %@" : {
+
+    },
+    "genre contains “%@”" : {
+
+    },
+    "iPod" : {
+
+    },
+    "iPod (%@)" : {
+
+    },
+    "iPod (4th generation) 20 GB" : {
+
+    },
+    "iPod (4th generation) 40 GB" : {
+
+    },
+    "iPod (4th generation) 60 GB" : {
+
+    },
+    "iPod Sync" : {
+
+    },
+    "iPod Sync Settings…" : {
+
+    },
+    "iPod couldn’t be ejected" : {
+
+    },
+    "iPod photo 20 GB" : {
+
+    },
+    "iPod photo 60 GB" : {
+
+    },
+    "iPod shuffle (%@ generation)" : {
+
+    },
+    "iPod shuffle (2nd generation) 1 GB" : {
+
+    },
+    "iPod shuffle 1 GB" : {
+
+    },
+    "iPod shuffle 512 MB" : {
+
+    },
+    "iTunesDB is truncated or corrupt (%@)" : {
+
+    },
+    "id \"%@\" is taken by a built-in mode" : {
+
+    },
+    "invalid display list" : {
+
+    },
+    "listening history, play counts, favorites, and star ratings" : {
+
+    },
+    "macOS could not configure the audio output (error %d)." : {
+
+    },
+    "macOS may ask you to confirm each audio format." : {
+
+    },
+    "master playlist: %@" : {
+
+    },
+    "matched to %@" : {
+
+    },
+    "no playlist named '%@' (have: %@)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "no playlist named '%1$@' (have: %2$@)"
+          }
+        }
+      }
+    },
+    "none" : {
+
+    },
+    "of" : {
+
+    },
+    "off" : {
+
+    },
+    "on" : {
+
+    },
+    "on disk" : {
+
+    },
+    "only the first %lld JavaScript plugin files were loaded; %lld exceeded the folder limit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "only the first %1$lld JavaScript plugin files were loaded; %2$lld exceeded the folder limit"
+          }
+        }
+      }
+    },
+    "played ≥ %lld×" : {
+
+    },
+    "playing time" : {
+
+    },
+    "playlists: %lld" : {
+
+    },
+    "plugin exceeds the %lld-byte file limit" : {
+
+    },
+    "plugin file could not be read" : {
+
+    },
+    "plugin file could not be read as valid UTF-8" : {
+
+    },
+    "plugin registry exceeds its resource budget" : {
+
+    },
+    "plugin runtime unavailable" : {
+
+    },
+    "plugin was not loaded because the folder byte limit was reached" : {
+
+    },
+    "plugin watchdog unavailable on this system; a plugin caught in an infinite loop can hang the deck" : {
+
+    },
+    "rated ≥ %lld★" : {
+
+    },
+    "rebuilt entirely from the files" : {
+
+    },
+    "recovered %lld from the device's files" : {
+
+    },
+    "renamed on both sides (\"%@\" here, \"%@\" on the iPod); kept the local name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "renamed on both sides (\"%1$@\" here, \"%2$@\" on the iPod); kept the local name"
+          }
+        }
+      }
+    },
+    "reset-sidecar refused: %@" : {
+
+    },
+    "seed failed: %@" : {
+
+    },
+    "song" : {
+
+    },
+    "songs" : {
+
+    },
+    "started from Nightdrive's database backup" : {
+
+    },
+    "sync aborted: %@ Re-run with --assume-empty-ledger to preserve the current file and sync with empty link history." : {
+
+    },
+    "sync failed: %@" : {
+
+    },
+    "the iPod" : {
+
+    },
+    "this track" : {
+
+    },
+    "to" : {
+
+    },
+    "tracks: %lld" : {
+
+    },
+    "unknown" : {
+
+    },
+    "unknown error" : {
+
+    },
+    "usage: __test-clear-transcode-cache <cacheDir> <startedMarker>" : {
+
+    },
+    "usage: __test-crash-artwork-media-install <ipodVolume> <newCover> <newMedia>" : {
+
+    },
+    "usage: dump <iTunesDB>" : {
+
+    },
+    "usage: reset-sidecar <libraryDir> <playlists|history> [--confirm]" : {
+
+    },
+    "usage: seed-demo <libraryDir> <fakeIpodDir> [--shuffle]" : {
+
+    },
+    "usage: sync <libraryDir> <ipodVolume> [--scope everything|playlists=Name[,Name…]] [--song-sync two-way|ipod-to-library|library-to-ipod] [--trim] [--confirm-removals] [--assume-empty-ledger]" : {
+
+    },
+    "usage: visualizers [--dir <folder>] [--render <dir>] [--colorway <id|all>] [--size <WxH>]" : {
+
+    },
+    "year %lld–%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "year %1$lld–%2$lld"
+          }
+        }
+      }
+    },
+    "year ≤ %lld" : {
+
+    },
+    "year ≥ %lld" : {
+
+    },
+    "“%@” isn't a mode or a group." : {
+
+    },
+    "•" : {
+
+    },
+    "• %@" : {
+
+    },
+    "• %lld plays" : {
+
+    },
+    "• 1 play" : {
+
+    },
+    "…and %lld more." : {
+
+    },
+    "⇧⌘V and clicking the glass will stop here." : {
+
+    },
+    "⚠ %@: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "⚠ %1$@: %2$@"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
