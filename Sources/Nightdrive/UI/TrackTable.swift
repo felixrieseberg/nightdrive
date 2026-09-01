@@ -7,7 +7,10 @@ struct PlaylistMenuItem: Identifiable {
 }
 
 struct TrackTable<ID: Hashable & Sendable>: View {
+  /// The stable, unfiltered rows for this table. Search visibility is applied
+  /// after sorting so changing or clearing a query never re-sorts the source.
   let rows: [SongRow<ID>]
+  var visibleRowIDs: Set<ID>? = nil
   var nowPlayingID: ID?
   var onActivate: (([SongRow<ID>], [SongRow<ID>]) -> Void)?
   var onPlayNext: (([SongRow<ID>]) -> Void)?
@@ -48,8 +51,10 @@ struct TrackTable<ID: Hashable & Sendable>: View {
   static var columnCustomizationKey: String { "songTableColumns" }
 
   var body: some View {
+    let displayedRows = TrackTableRowProjection.visibleRows(
+      in: sortedRows, matching: visibleRowIDs)
     Table(
-      sortedRows, selection: selection, sortOrder: $sortOrder,
+      displayedRows, selection: selection, sortOrder: $sortOrder,
       columnCustomization: $columnCustomization
     ) {
       identityColumns
@@ -67,7 +72,7 @@ struct TrackTable<ID: Hashable & Sendable>: View {
       contextMenu(for: selectedRows(for: ids))
     } primaryAction: { ids in
       if let id = ids.first, let row = rows.first(where: { $0.id == id }) {
-        onActivate?([row], sortedRows)
+        onActivate?([row], displayedRows)
       }
     }
     .task(id: sortGeneration) { await sortRows() }
@@ -77,10 +82,14 @@ struct TrackTable<ID: Hashable & Sendable>: View {
         localSelection.formIntersection(Set(rows.map(\.id)))
       }
     }
+    .onChange(of: visibleRowIDs) {
+      guard selectionBinding == nil, let visibleRowIDs else { return }
+      localSelection.formIntersection(visibleRowIDs)
+    }
     .onChange(of: sortOrder) { sortGeneration &+= 1 }
     .trackCommands(
       selection: selection,
-      visibleIDs: Set(rows.map(\.id)),
+      visibleIDs: Set(displayedRows.map(\.id)),
       mutationsDisabled: mutationsDisabled,
       canEditInfo: { ids in
         exactRows(for: ids).allSatisfy { isEditInfoEnabled?($0) ?? true }
@@ -98,7 +107,7 @@ struct TrackTable<ID: Hashable & Sendable>: View {
             .font(.callout)
             .foregroundStyle(.secondary)
         }
-      } else if rows.isEmpty, !searchText.isEmpty, let onClearSearch {
+      } else if displayedRows.isEmpty, !searchText.isEmpty, let onClearSearch {
         ContentUnavailableView {
           Label("No Results for “\(searchText)”", systemImage: "magnifyingglass")
         } description: {
@@ -306,7 +315,7 @@ struct TrackTable<ID: Hashable & Sendable>: View {
     let canDelete = onDelete != nil && (!multiple || allowsBulkDelete)
     if let onActivate {
       Button(multiple ? String(localized: "Play Selection") : String(localized: "Play")) {
-        onActivate(selectedRows, sortedRows)
+        onActivate(selectedRows, displayedRows)
       }
     }
     if let onPlayNext, !multiple {
@@ -424,13 +433,28 @@ struct TrackTable<ID: Hashable & Sendable>: View {
     if let rowsForSelection {
       return rowsForSelection(ids)
     }
-    return sortedRows.filter { ids.contains($0.id) }
+    return displayedRows.filter { ids.contains($0.id) }
+  }
+
+  private var displayedRows: [SongRow<ID>] {
+    TrackTableRowProjection.visibleRows(in: sortedRows, matching: visibleRowIDs)
   }
 
   private var selection: Binding<Set<ID>> {
     selectionBinding ?? $localSelection
   }
 
+}
+
+enum TrackTableRowProjection {
+  /// A filtered view of an already-sorted source. Returning the source for an
+  /// empty search is what makes clearing search an O(1), zero-sort operation.
+  static func visibleRows<ID: Hashable & Sendable>(
+    in sortedRows: [SongRow<ID>], matching visibleRowIDs: Set<ID>?
+  ) -> [SongRow<ID>] {
+    guard let visibleRowIDs else { return sortedRows }
+    return sortedRows.filter { visibleRowIDs.contains($0.id) }
+  }
 }
 
 extension TableColumnContent {

@@ -670,6 +670,7 @@ struct LibraryView: View {
       } else {
         TrackTable(
           rows: model.rows,
+          visibleRowIDs: model.visibleRowIDs,
           nowPlayingID: app.player.currentTrack?.id,
           onActivate: { selectedRows, visibleRows in
             let selectedTracks = model.tracks(for: selectedRows)
@@ -794,6 +795,7 @@ struct LibraryView: View {
 
   fileprivate struct TableModel {
     var rows: [SongRow<TrackID>] = []
+    var visibleRowIDs: Set<TrackID>?
 
     fileprivate var visibleTracksByID: [TrackID: LibraryTrack] = [:]
     fileprivate var catalog = LibraryCatalog()
@@ -818,9 +820,6 @@ struct LibraryView: View {
 
   fileprivate struct TableModelInputs: Equatable {
     var libraryRevision: UInt64
-    /// The search text a resolved filter was computed for; nil when the
-    /// table is unfiltered.
-    var filterQuery: String?
     var scopedTracks: [LibraryTrack]?
     var listeningMetadata: [TrackID: TrackListeningMetadata]
   }
@@ -828,19 +827,29 @@ struct LibraryView: View {
   fileprivate final class TableModelCache {
     private var inputs: TableModelInputs?
     private var model = TableModel()
+    private var latestVisibleRowIDs: Set<TrackID>?
 
     /// The last built model, shown while a debounced filter is resolving so
-    /// typing never blanks the table or rebuilds it per keystroke.
-    var latestModel: TableModel { model }
+    /// typing never blanks the table or changes the visible results per
+    /// keystroke.
+    var latestModel: TableModel {
+      var latest = model
+      latest.visibleRowIDs = latestVisibleRowIDs
+      return latest
+    }
 
     func model(
-      for inputs: TableModelInputs, rebuild: (TableModelInputs) -> TableModel
+      for inputs: TableModelInputs, visibleRowIDs: Set<TrackID>?,
+      rebuild: (TableModelInputs) -> TableModel
     ) -> TableModel {
       if inputs != self.inputs {
         model = rebuild(inputs)
         self.inputs = inputs
       }
-      return model
+      latestVisibleRowIDs = visibleRowIDs
+      var presented = model
+      presented.visibleRowIDs = visibleRowIDs
+      return presented
     }
   }
 
@@ -853,35 +862,30 @@ struct LibraryView: View {
         resolved.query == query, resolved.revision == libraryRevision
       else {
         // The off-main filter for this exact query hasn't landed yet; keep
-        // the previous rows until the `.task(id:)` resolution publishes.
+        // the previous visible result until the `.task(id:)` resolution publishes.
         return tableModelCache.latestModel
       }
       matchedIDs = resolved.value
     }
     let inputs = TableModelInputs(
       libraryRevision: libraryRevision,
-      filterQuery: matchedIDs == nil ? nil : query,
       scopedTracks: scopedTracks,
       listeningMetadata: app.listeningHistory.metadataByID)
-    return tableModelCache.model(for: inputs) { inputs in
-      buildTableModel(inputs: inputs, matchedIDs: matchedIDs)
+    return tableModelCache.model(for: inputs, visibleRowIDs: matchedIDs) { inputs in
+      buildTableModel(inputs: inputs)
     }
   }
 
-  private func buildTableModel(
-    inputs: TableModelInputs, matchedIDs: Set<TrackID>?
-  ) -> TableModel {
+  private func buildTableModel(inputs: TableModelInputs) -> TableModel {
     var model = TableModel()
     model.catalog = app.library.catalog
     model.libraryTracks = app.library.tracks
     model.listeningMetadata = inputs.listeningMetadata
 
     let visible = inputs.scopedTracks ?? model.libraryTracks
-    let expectedCount = matchedIDs.map { min(visible.count, $0.count) } ?? visible.count
-    model.rows.reserveCapacity(expectedCount)
-    model.visibleTracksByID.reserveCapacity(expectedCount)
+    model.rows.reserveCapacity(visible.count)
+    model.visibleTracksByID.reserveCapacity(visible.count)
     for track in visible {
-      if let matchedIDs, !matchedIDs.contains(track.id) { continue }
       let row = SongRow(track: track, listening: inputs.listeningMetadata[track.id])
       model.rows.append(row)
       model.visibleTracksByID[row.id] = track
