@@ -109,6 +109,7 @@ struct DeckFaceProjection: GeometryEffect {
 final class DeckSCNView: SCNView {
   var blocksClicks = false
   var onLayout: (() -> Void)?
+  var onLiveResizeEnded: (() -> Void)?
   var contentClipHeight: CGFloat = 0
   var overlayCutout: [NSPoint]?
 
@@ -121,6 +122,11 @@ final class DeckSCNView: SCNView {
   override func layout() {
     super.layout()
     onLayout?()
+  }
+
+  override func viewDidEndLiveResize() {
+    super.viewDidEndLiveResize()
+    onLiveResizeEnded?()
   }
 }
 
@@ -150,6 +156,7 @@ final class DeckSceneCoordinator: NSObject, SCNSceneRendererDelegate {
     view.scene = scene
     buildRig(in: scene.rootNode)
     view.onLayout = { [weak self] in self?.rebuildIfNeeded() }
+    view.onLiveResizeEnded = { [weak self] in self?.rebuildIfNeeded() }
     view.pointOfView = scene.rootNode.childNode(withName: "camera", recursively: false)
     warmupDeadline = Task { @MainActor [weak self] in
       do {
@@ -248,17 +255,42 @@ final class DeckSceneCoordinator: NSObject, SCNSceneRendererDelegate {
 
   // MARK: - door
 
+  /// How far the door may drift from the width it was extruded at. Re-extruding
+  /// the chamfered slab per mouse event is far too expensive, so a drag stretches
+  /// the door it has — under 3% on a full-width one, which does not show.
+  private static let liveResizeTolerance: CGFloat = 16
+
   private func rebuildIfNeeded() {
     guard let view, let root = view.scene?.rootNode else { return }
     let width = view.bounds.width
     guard width > DeckMechanism.sideInset * 2 + 40 else { return }
-    guard abs(width - builtWidth) > 0.5 else { return }
-    builtWidth = width
-    pivot?.removeFromParentNode()
-    dogs.removeAll()
-    pivot = buildDoor(width: width)
-    root.addChildNode(pivot!)
-    pose()
+    let tolerance = view.inLiveResize ? Self.liveResizeTolerance : 0.5
+    var rebuilt = false
+    if pivot == nil || abs(width - builtWidth) > tolerance {
+      builtWidth = width
+      pivot?.removeFromParentNode()
+      dogs.removeAll()
+      pivot = buildDoor(width: width)
+      root.addChildNode(pivot!)
+      rebuilt = true
+    }
+    let stretched = stretch(to: width)
+    if rebuilt || stretched { pose() }
+  }
+
+  /// Widens the built door to the view's current width.
+  private func stretch(to width: CGFloat) -> Bool {
+    guard let pivot else { return false }
+    let built = builtWidth - DeckMechanism.sideInset * 2
+    let wanted = width - DeckMechanism.sideInset * 2
+    guard built > 0, wanted > 0 else { return false }
+    let scale = wanted / built
+    guard abs(pivot.scale.x - scale) > 0.0001 else { return false }
+    SCNTransaction.begin()
+    SCNTransaction.animationDuration = 0
+    pivot.scale.x = scale
+    SCNTransaction.commit()
+    return true
   }
 
   private func buildDoor(width: CGFloat) -> SCNNode {

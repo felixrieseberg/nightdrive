@@ -314,11 +314,89 @@ struct VisualizerRasterTests {
     #expect(empty.image(ramp: .phosphor(.vfd), levels: 4) == nil)
   }
 
+  @Test
+  func testImagePixelsSurviveTheProviderOwningTheirBuffer() {
+    let raster = VisualizerRaster()
+    raster.configure(for: CGSize(width: 128, height: 32), rows: 8)
+    raster.clear(255)
+    let ramp = VisualizerInkRamp.phosphor(.vfd)
+    guard let image = raster.image(ramp: ramp, levels: 0),
+      let pixels = image.dataProvider?.data as Data?
+    else {
+      Issue.record("a full-intensity raster must produce an image")
+      return
+    }
+    #expect(pixels.count == raster.width * raster.height * 4)
+    let ink = ramp.color(at: 1)
+    for channel in 0..<3 {
+      let expected = [ink.red, ink.green, ink.blue][channel] * 255
+      #expect(abs(Double(pixels[channel]) - expected) <= 1)
+    }
+    #expect(pixels[3] == 255)
+    // A lifetime slip in the provider-owned buffer would show up as garbage
+    // past the first few pixels.
+    let last = pixels.count - 4
+    #expect(pixels[last] == pixels[0])
+    #expect(pixels[last + 3] == 255)
+  }
+
+  @Test
+  func testLiveResizeHoldsTheLastFrameInsteadOfRegeneratingIt() {
+    let visualizer = ComposeCountingVisualizer()
+    var frame = VisualizerFrame(size: CGSize(width: 400, height: 100))
+    VisualizerProbe.draw(visualizer, frame)
+    #expect(visualizer.composeCount == 1)
+    let held = visualizer.raster.width
+    #expect(held > 0)
+
+    frame.size = CGSize(width: 260, height: 100)
+    frame.time = 1
+    frame.isLiveResizing = true
+    VisualizerProbe.draw(visualizer, frame)
+    #expect(visualizer.composeCount == 1, "a live drag must reuse the picture it has")
+    #expect(visualizer.raster.width == held, "a live drag must not reallocate the raster")
+
+    frame.time = 2
+    frame.isLiveResizing = false
+    VisualizerProbe.draw(visualizer, frame)
+    #expect(visualizer.composeCount == 2, "the mode resumes once the drag ends")
+    #expect(visualizer.raster.width != held)
+  }
+
+  @Test
+  func testLiveResizeStillRendersWhenNoFrameIsHeldYet() {
+    let visualizer = ComposeCountingVisualizer()
+    var frame = VisualizerFrame(size: CGSize(width: 400, height: 100))
+    frame.isLiveResizing = true
+    VisualizerProbe.draw(visualizer, frame)
+    #expect(visualizer.composeCount == 1)
+
+    // A reset drops the held picture, so a drag cannot stretch a stale frame.
+    visualizer.reset()
+    frame.time = 1
+    VisualizerProbe.draw(visualizer, frame)
+    #expect(visualizer.composeCount == 2)
+  }
+
   private func makeRaster() -> VisualizerRaster {
     let raster = VisualizerRaster()
     raster.configure(for: CGSize(width: 160, height: 80), cell: 4)
     #expect(!(raster.isEmpty))
     raster.clear()
     return raster
+  }
+}
+
+@MainActor
+private final class ComposeCountingVisualizer: RasterVisualizer {
+  private(set) var composeCount = 0
+
+  init() {
+    super.init(id: "compose-probe", rows: 8, levels: 2)
+  }
+
+  override func composeRaster(_ frame: VisualizerFrame) {
+    composeCount += 1
+    raster.clear(200)
   }
 }

@@ -58,6 +58,10 @@ struct VisualizerFrame: Sendable {
   var album: String = ""
   var boot: Double?
   var palette: VisualizerPalette = .vfd
+  /// Set while the window is being dragged. Modes with a per-size cost hold
+  /// their last picture instead of regenerating it for a width that is about
+  /// to change again.
+  var isLiveResizing: Bool = false
 
   var width: CGFloat { size.width }
   var height: CGFloat { size.height }

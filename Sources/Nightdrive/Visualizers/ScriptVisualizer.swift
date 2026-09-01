@@ -29,7 +29,9 @@ final class ScriptVisualizer: Visualizer {
       Self.drawFailure(failure, name: descriptor.name, frame: frame, into: &ctx)
       return
     }
-    if !inFlight {
+    // A drag replays the last list at the new size rather than asking the
+    // script for another one.
+    if !inFlight, !frame.isLiveResizing {
       inFlight = true
       let requestedGeneration = generation
       runtime.render(id: descriptor.id, frame: frame) { [weak self] result in
