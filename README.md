@@ -18,8 +18,7 @@ Features:
 - A fold-down VFD deck with visualizers, themed colourways, and a detachable
   floating mini-player. You can build your own via plugins!
 - Fully native and performant macOS app
-- Free without accounts, ads, or subscriptions. It's
-  [open-source](https://github.com/felixrieseberg/nightdrive), too.
+- Free without accounts, ads, or subscriptions
 
 # Install
 Download the newest build from

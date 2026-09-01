@@ -44,9 +44,19 @@
       </p>
 
       <section class="section proof">
-        <div class="video-placeholder" data-video-placeholder role="img" aria-label="Placeholder for the forthcoming Nightdrive demonstration video">
-          <span>VIDEO PLACEHOLDER</span>
-        </div>
+        <video
+          class="demo-video"
+          src="./demo.mp4"
+          poster="./demo-poster.jpg"
+          width="1328"
+          height="936"
+          autoplay
+          muted
+          loop
+          playsinline
+          controls
+          aria-label="Screen recording of Nightdrive: browsing a music library, subscribing to podcasts, the fold-down VFD deck with visualizers, and syncing to a classic iPod."
+        ></video>
       </section>
 
       <section class="section" aria-labelledby="features-heading">
@@ -94,5 +104,17 @@
         <p>Made with love by <a href="https://www.felixrieseberg.com">Felix Rieseberg</a> in Mill Valley, CA</p>
       </footer>
     </main>
+
+    <script>
+      // The site otherwise ships no JavaScript. This exists only so the
+      // autoplaying demo honours the same reduced-motion preference the
+      // stylesheet already respects.
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        for (const video of document.querySelectorAll("video[autoplay]")) {
+          video.autoplay = false;
+          video.pause();
+        }
+      }
+    </script>
   </body>
 </html>

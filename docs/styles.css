@@ -163,17 +163,20 @@ footer p {
   margin: 0;
 }
 
-.video-placeholder {
-  display: grid;
+.demo-video {
+  display: block;
   width: 100%;
   max-width: 660px;
-  aspect-ratio: 16 / 9;
-  place-items: center;
-  border: 1px dashed rgba(115, 255, 214, 0.3);
-  background: rgba(115, 255, 214, 0.02);
-  color: var(--rail);
-  font-size: 11px;
-  letter-spacing: 0.2em;
+  height: auto;
+  aspect-ratio: 1328 / 936;
+  border: 1px solid rgba(115, 255, 214, 0.28);
+  background: var(--bg);
+  box-shadow: 0 0 30px rgba(115, 255, 214, 0.1);
+}
+
+.demo-video:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 5px;
 }
 
 .divider {
