@@ -126,6 +126,44 @@ enum TestScratch {
   }
 }
 
+/// A `UserDefaults` that keeps its values in memory.
+///
+/// Tests used to hand stores a `UserDefaults(suiteName:)` named after a fresh
+/// UUID. `cfprefsd` registers every one of those suites and writes a plist
+/// into `~/Library/Preferences`, so each run leaked a domain; clearing the
+/// domain in `defer` does not help, because the daemon writes the (now empty)
+/// plist back after the test process exits. Staying in memory never involves
+/// the daemon.
+///
+/// To sweep domains a suite-based test leaked, matching only names that end in
+/// a UUID so the app's own `Nightdrive` domain cannot be hit:
+///
+///     defaults domains | tr ',' '\n' | sed 's/^ *//' \
+///       | grep -E '^<prefix>[.-][0-9A-Fa-f-]{36}$' \
+///       | while read -r d; do
+///           defaults delete "$d"; rm -f "$HOME/Library/Preferences/$d.plist"
+///         done
+///
+/// Only the three primitives are overridden, which is what `UserDefaults`
+/// documents subclasses to do: the typed accessors are built on them, and
+/// overriding the typed setters instead traps at runtime.
+final class MemoryDefaults: UserDefaults, @unchecked Sendable {
+  private let lock = NSLock()
+  private var storage: [String: Any] = [:]
+
+  override func object(forKey key: String) -> Any? {
+    lock.withLock { storage[key] }
+  }
+
+  override func set(_ value: Any?, forKey key: String) {
+    lock.withLock { storage[key] = value }
+  }
+
+  override func removeObject(forKey key: String) {
+    lock.withLock { storage[key] = nil }
+  }
+}
+
 private final class ScratchCleanup: @unchecked Sendable {
   let url: URL
 

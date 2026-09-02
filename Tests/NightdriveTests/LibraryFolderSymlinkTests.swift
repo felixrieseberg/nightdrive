@@ -131,9 +131,7 @@ final class LibraryFolderSymlinkTests {
 
   @Test
   func testMovedSelectedDirectoryRebindsToItsNewCanonicalPath() async throws {
-    let suiteName = "Nightdrive.LibraryFolderMovedTests.\(UUID().uuidString)"
-    let defaults = try #require(UserDefaults(suiteName: suiteName))
-    defer { defaults.removePersistentDomain(forName: suiteName) }
+    let defaults = MemoryDefaults()
     let originalSong = firstTarget.appendingPathComponent("original.mp3")
     try writeTestSong(title: "Original", to: originalSong, genre: "Test")
     let library = LibraryStore(folderURL: firstTarget, folderDefaults: defaults)
@@ -178,9 +176,7 @@ final class LibraryFolderSymlinkTests {
 
   @Test
   func testCanonicalTargetIsPersistedInsteadOfSelectedAlias() throws {
-    let suiteName = "Nightdrive.LibraryFolderSymlinkTests.\(UUID().uuidString)"
-    let defaults = try #require(UserDefaults(suiteName: suiteName))
-    defer { defaults.removePersistentDomain(forName: suiteName) }
+    let defaults = MemoryDefaults()
     try pointAlias(at: secondTarget)
     let library = LibraryStore(folderURL: firstTarget, folderDefaults: defaults)
 
@@ -192,9 +188,7 @@ final class LibraryFolderSymlinkTests {
 
   @Test
   func testConfiguredSymlinkIsCanonicalizedAndRewrittenOnLoad() throws {
-    let suiteName = "Nightdrive.LibraryFolderSymlinkLoadTests.\(UUID().uuidString)"
-    let defaults = try #require(UserDefaults(suiteName: suiteName))
-    defer { defaults.removePersistentDomain(forName: suiteName) }
+    let defaults = MemoryDefaults()
     try pointAlias(at: firstTarget)
     defaults.set(alias.path, forKey: "libraryFolderPath")
 
