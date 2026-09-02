@@ -168,7 +168,7 @@ footer p {
   width: 100%;
   max-width: 660px;
   height: auto;
-  aspect-ratio: 1328 / 936;
+  aspect-ratio: 1328 / 874;
   border: 1px solid rgba(115, 255, 214, 0.28);
   background: var(--bg);
   box-shadow: 0 0 30px rgba(115, 255, 214, 0.1);
