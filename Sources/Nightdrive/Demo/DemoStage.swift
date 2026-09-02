@@ -18,6 +18,13 @@
     }
 
     @ObservationIgnored private var recordingWindowStyleMask: NSWindow.StyleMask?
+    @ObservationIgnored private var recordingWindowWasOpaque = true
+    @ObservationIgnored private var recordingWindowBackground: NSColor?
+
+    /// The corner radius macOS gives a titled window, measured from a
+    /// titled recording: a borderless window is clipped square, so the
+    /// content layer carries the same mask while recording.
+    private static let titledWindowCornerRadius: CGFloat = 16
     @ObservationIgnored private weak var shiftedSidebarTable: NSTableView?
 
     /// Strips the title bar for the length of a recording. macOS draws its
@@ -33,7 +40,16 @@
         window.styleMask.contains(.titled)
       else { return }
       recordingWindowStyleMask = window.styleMask
+      recordingWindowWasOpaque = window.isOpaque
+      recordingWindowBackground = window.backgroundColor
       window.styleMask.remove(.titled)
+      window.isOpaque = false
+      window.backgroundColor = .clear
+      if let contentView = window.contentView {
+        contentView.wantsLayer = true
+        contentView.layer?.cornerRadius = Self.titledWindowCornerRadius
+        contentView.layer?.masksToBounds = true
+      }
       compensateSidebarInset(in: window)
     }
 
@@ -86,6 +102,10 @@
       shiftedSidebarTable = nil
       if let window = DemoInput.mainWindow {
         if let recordingWindowStyleMask {
+          window.contentView?.layer?.cornerRadius = 0
+          window.contentView?.layer?.masksToBounds = false
+          window.isOpaque = recordingWindowWasOpaque
+          window.backgroundColor = recordingWindowBackground
           window.styleMask = recordingWindowStyleMask
           self.recordingWindowStyleMask = nil
         }
