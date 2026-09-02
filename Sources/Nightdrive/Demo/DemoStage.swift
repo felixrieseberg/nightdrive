@@ -17,6 +17,53 @@
       captureBadgeMaskVisible = false
     }
 
+    @ObservationIgnored private var recordingWindowStyleMask: NSWindow.StyleMask?
+    @ObservationIgnored private weak var shiftedSidebarTable: NSTableView?
+
+    /// Strips the title bar for the length of a recording. macOS draws its
+    /// purple "this window is being captured" capsule into the title bar of
+    /// every titled window ScreenCaptureKit records, and it lands in the
+    /// exported frames: the capsule is composited by the window server, so
+    /// neither hiding the AppKit button container nor covering it with
+    /// SwiftUI content removes it. A borderless window has no title bar for
+    /// the capsule to live in. Call before the capture stream is created;
+    /// `reset()` restores the original style.
+    func prepareWindowForRecording() {
+      guard let window = DemoInput.mainWindow, recordingWindowStyleMask == nil,
+        window.styleMask.contains(.titled)
+      else { return }
+      recordingWindowStyleMask = window.styleMask
+      window.styleMask.remove(.titled)
+      compensateSidebarInset(in: window)
+    }
+
+    /// SwiftUI's sidebar `List` pads its first row by 13pt in a window
+    /// without a title bar, while the rest of the layout stays put. Slide
+    /// the table back so the recording matches the titled layout. Negative
+    /// scroll-view insets are clamped, so this nudges the table's layer
+    /// instead, which no layout pass rewrites.
+    private func compensateSidebarInset(in window: NSWindow) {
+      func firstDescendant<T: NSView>(of view: NSView, as type: T.Type) -> T? {
+        if let match = view as? T { return match }
+        for subview in view.subviews {
+          if let found = firstDescendant(of: subview, as: type) { return found }
+        }
+        return nil
+      }
+      // The sidebar is the leading column of the navigation split view.
+      guard let root = window.contentView,
+        let splitView = firstDescendant(of: root, as: NSSplitView.self),
+        let sidebarColumn = splitView.arrangedSubviews.first,
+        let table = firstDescendant(of: sidebarColumn, as: NSTableView.self),
+        table.numberOfRows > 0
+      else { return }
+      let shift = table.rect(ofRow: 0).minY
+      guard shift > 0 else { return }
+      table.wantsLayer = true
+      table.layer?.transform = CATransform3DMakeTranslation(0, -shift, 0)
+      shiftedSidebarTable = table
+    }
+
     func coverWindowChrome() {
       guard let window = DemoInput.mainWindow else { return }
       setWindowChromeOpacity(0)
@@ -35,7 +82,13 @@
       dipOpacity = 0
       endCardVisible = false
       captureBadgeMaskVisible = false
+      shiftedSidebarTable?.layer?.transform = CATransform3DIdentity
+      shiftedSidebarTable = nil
       if let window = DemoInput.mainWindow {
+        if let recordingWindowStyleMask {
+          window.styleMask = recordingWindowStyleMask
+          self.recordingWindowStyleMask = nil
+        }
         Self.titlebarContainer(in: window)?.alphaValue = 1
         for kind in Self.windowButtons {
           window.standardWindowButton(kind)?.isHidden = false

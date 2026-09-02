@@ -90,6 +90,7 @@
         do {
           if self?.automaticallyRecordsVideo == true, let window = DemoInput.mainWindow {
             self?.stage.showCaptureBadgeMask()
+            self?.stage.prepareWindowForRecording()
             do {
               try await self?.recorder.start(
                 window: window, trackTitle: track.title,

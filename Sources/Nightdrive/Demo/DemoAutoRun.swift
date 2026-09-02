@@ -9,9 +9,15 @@
       ProcessInfo.processInfo.environment["NIGHTDRIVE_DEMO_TRACK"]
     }
 
+    @MainActor private static var isArmedForLaunch = false
+
+    /// Arms once per launch. The window's launch task re-runs whenever
+    /// AppKit swaps the frame view (restyling the window for recording does
+    /// exactly that), and a second arming would restart the track.
     @MainActor
     static func armIfRequested(app: AppState) {
-      guard let id = trackID else { return }
+      guard let id = trackID, !isArmedForLaunch else { return }
+      isArmedForLaunch = true
       Task { @MainActor in
         guard let track = DemoTracks.all.first(where: { $0.id == id }) else {
           let known = DemoTracks.all.map(\.id).joined(separator: ", ")
@@ -29,6 +35,9 @@
               width: size.width, height: size.height),
             display: true)
         }
+        // Restyle the window before the waits below so the launch task's
+        // re-run (a rescan, integrations) settles before the track starts.
+        app.demo.stage.prepareWindowForRecording()
 
         await app.visualizers.waitUntilReady()
         await wait(timeout: 60) { !app.library.isScanning && app.library.folderURL != nil }
