@@ -25,7 +25,7 @@ TEST_PARALLEL_FLAG := $(if $(filter-out 0,$(TEST_PARALLEL)),--parallel)
 	verification-cache-status \
 	verification-cache-prune app package release developerid appcast publish ship unship \
 	run open close demo demo-run \
-	e2e snapshots snapshots-settings sizzle benchmark-performance benchmark-idle benchmark-library clean icon xcode macos macos-release
+	e2e snapshots snapshots-settings sizzle demo-video benchmark-performance benchmark-idle benchmark-library clean icon xcode macos macos-release
 
 help:
 	@printf "Nightdrive commands\n\n"
@@ -59,6 +59,7 @@ help:
 	@printf "  make snapshots    Render the GUI snapshot tour\n"
 	@printf "  make snapshots-settings  Render only the Settings window shots\n"
 	@printf "  make sizzle       Record the ~60s demo video (appears on screen; MP4 in ~/Movies)\n"
+	@printf "  make demo-video   Encode the newest sizzle recording into the website clip\n"
 	@printf "  make benchmark-performance  Measure release-build CPU and memory, idle and playing\n"
 	@printf "  make benchmark-idle  Measure the idle subset of the performance benchmark\n"
 	@printf "  make benchmark-library  Measure synthetic 20k/50k/100k library scans and indexes\n"
@@ -218,6 +219,9 @@ snapshots-settings:
 
 sizzle:
 	./scripts/sizzle.sh
+
+demo-video:
+	./scripts/encode-demo-video.sh $(DEMO_VIDEO_INPUT)
 
 benchmark-performance:
 	./scripts/benchmark-performance.sh "$(if $(BENCHMARK_CONFIG),$(BENCHMARK_CONFIG),release)"

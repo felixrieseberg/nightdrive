@@ -96,6 +96,14 @@ subscriptions, but only ever syncs a staged fake iPod named "My iPod" — never
 a real device; the recording lands in `~/Movies/Nightdrive Demos` unless
 `NIGHTDRIVE_DEMO_OUTPUT_DIR` says otherwise.
 
+`make demo-video` re-encodes the newest such recording into `docs/demo.mp4`,
+the clip the website autoplays, and writes its poster frame. Sizzle records at
+native resolution and frame rate, which is far too heavy to serve; the script
+header in [`scripts/encode-demo-video.sh`](scripts/encode-demo-video.sh)
+explains the width, frame rate, and quality it settles on and why. It warns
+when a differently shaped recording no longer matches the dimensions
+`docs/index.html` and `docs/styles.css` declare.
+
 ## Conventions
 
 - Keep Swift changes idiomatic and formatted with the repository
