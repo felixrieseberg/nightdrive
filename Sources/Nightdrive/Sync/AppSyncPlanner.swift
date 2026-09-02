@@ -218,7 +218,11 @@ final class AppSyncPlanner {
       availableCapacity: device.availableCapacity,
       family: device.family,
       settings: transcodeSettings)
-    if let shortfall = plan.capacityShortfall {
+    if let shortfall = plan.capacityShortfall,
+      SyncCapacity.trimCanRecover(
+        plan: plan, availableCapacity: device.availableCapacity,
+        family: device.family, settings: transcodeSettings)
+    {
       plan.suggestedCapacityTrim = SyncCapacity.suggestedTrim(
         plan: plan, shortfall: shortfall,
         family: device.family, settings: transcodeSettings)

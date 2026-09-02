@@ -552,15 +552,18 @@ final class AppState {
       }
     }
 
+    // A trashed conflict's ledger and podcast references follow the keeper,
+    // so a device copy linked to the removed file keeps its stable link.
+    let sidecarMoves = relativeMoves.merging(removedReferenceMoves) { move, _ in move }
     var sidecarErrors: [String] = []
     if !mapping.isEmpty {
-      if let folder, !relativeMoves.isEmpty {
-        do { try SyncLedgerStore.remapMovedFiles(relativeMoves, libraryFolder: folder) } catch {
+      if let folder, !sidecarMoves.isEmpty {
+        do { try SyncLedgerStore.remapMovedFiles(sidecarMoves, libraryFolder: folder) } catch {
           sidecarErrors.append(error.localizedDescription)
         }
         playlistSyncLedgerCache.invalidate()
       }
-      do { try podcasts.remapMovedFiles(relativeMoves.merging(removedReferenceMoves) { move, _ in move }) } catch {
+      do { try podcasts.remapMovedFiles(sidecarMoves) } catch {
         sidecarErrors.append(error.localizedDescription)
       }
       do { try playlists.remapTrackIDs(mapping) } catch {
@@ -878,8 +881,13 @@ final class AppState {
 
   /// Consent-gated entry point shared by launch warm-up and the Podcasts
   /// view's fallback task (for example, when podcasts are enabled later).
-  func preloadPodcastEpisodes() async {
+  ///
+  /// An `automatic` call has no user action behind it, so it only runs once
+  /// the user has subscribed to something worth refreshing; a fresh install
+  /// never contacts the directory or a publisher on its own.
+  func preloadPodcastEpisodes(automatic: Bool = false) async {
     guard onlineServices.isPodcastsEnabled else { return }
+    if automatic, podcasts.subscriptions.isEmpty { return }
     await podcasts.preloadEpisodes {
       onlineServices.isPodcastsEnabled
     } refreshSubscriptionsWhile: {
@@ -1407,7 +1415,9 @@ final class AppState {
         }
         await deviceManager.reload(device)
         await library.rescan()
-        if syncSettings(for: device).ejectAfterSync {
+        // The checkbox promises ejection after a sync without errors, and
+        // ejecting would also take the device view's Details button with it.
+        if syncSettings(for: device).ejectAfterSync, result.failures.isEmpty {
           await deviceManager.eject(device)
         }
         syncState = .finished(result)
@@ -1543,12 +1553,17 @@ final class AppState {
       plan.scopeInput.confirmedRemovalDbids = options.confirmedRemovalDbids ?? planned
     }
     if let shortfall = plan.capacityShortfall {
-      guard options.applySuggestedTrim else {
+      guard options.applySuggestedTrim, !plan.suggestedCapacityTrim.isEmpty else {
         throw AppSyncPreparationError(
-          String(
-            localized:
-              "Not enough free space on \(device.name) — the planned copies are \(shortfall.byteText) over. Trim the sync or free up space."
-          ))
+          plan.suggestedCapacityTrim.isEmpty
+            ? String(
+              localized:
+                "Not enough free space on \(device.name) — the planned updates are \(shortfall.byteText) over and dropping new songs would not help. Free up space or narrow the sync scope."
+            )
+            : String(
+              localized:
+                "Not enough free space on \(device.name) — the planned copies are \(shortfall.byteText) over. Trim the sync or free up space."
+            ))
       }
       let trimmedKeys =
         options.confirmedTrimKeys

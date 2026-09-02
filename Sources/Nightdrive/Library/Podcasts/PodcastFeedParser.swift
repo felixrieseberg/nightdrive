@@ -90,7 +90,13 @@ enum PodcastFeedParser {
     return ext.isEmpty || audioExtensions.contains(ext)
   }
 
-  /// Parses "HH:MM:SS", "MM:SS", or plain seconds.
+  /// Longest episode duration a feed may claim; anything beyond a year is a
+  /// publisher error rather than an audio file.
+  static let maxDurationSeconds = 366 * 24 * 60 * 60
+
+  /// Parses "HH:MM:SS", "MM:SS", or plain seconds. The components are
+  /// publisher-controlled, so arithmetic on them reports overflow instead of
+  /// trapping, and implausible totals parse as no duration at all.
   static func durationSeconds(from value: String) -> Int? {
     let parts = value.trimmingCharacters(in: .whitespacesAndNewlines)
       .split(separator: ":")
@@ -98,7 +104,14 @@ enum PodcastFeedParser {
     guard parts.count <= 3, !parts.isEmpty, parts.allSatisfy({ ($0 ?? -1) >= 0 }) else {
       return nil
     }
-    return parts.compactMap { $0 }.reduce(0) { $0 * 60 + $1 }
+    var total = 0
+    for part in parts.compactMap({ $0 }) {
+      let (scaled, scaleOverflowed) = total.multipliedReportingOverflow(by: 60)
+      let (sum, sumOverflowed) = scaled.addingReportingOverflow(part)
+      guard !scaleOverflowed, !sumOverflowed, sum <= maxDurationSeconds else { return nil }
+      total = sum
+    }
+    return total
   }
 
   /// RFC822 pubDate formatters, most common variant first. Feed loads parse

@@ -247,6 +247,17 @@ enum CLI {
                   plan: plan, availableCapacity: availableCapacity,
                   family: deviceFamily, settings: transcodeSettings)
                 {
+                  guard
+                    SyncCapacity.trimCanRecover(
+                      plan: plan, availableCapacity: availableCapacity,
+                      family: deviceFamily, settings: transcodeSettings)
+                  else {
+                    fail(
+                      String(
+                        localized:
+                          "Not syncing: planned updates are \(shortfall.byteText) over the iPod's free space, and dropping new songs would not help. Free up space or narrow the scope."
+                      ))
+                  }
                   let trim = SyncCapacity.suggestedTrim(
                     plan: plan, shortfall: shortfall,
                     family: deviceFamily, settings: transcodeSettings)

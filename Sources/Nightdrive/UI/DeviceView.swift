@@ -568,10 +568,14 @@ struct DeviceView: View {
   private func requestSync(_ plan: SyncPlan?) {
     guard let plan else { return }
     let removalCount = plan.removeFromDevice.count
-    if let shortfall = plan.capacityShortfall {
+    if let shortfall = plan.capacityShortfall, !plan.suggestedCapacityTrim.isEmpty {
       syncConfirmation = SyncConfirmationInfo(
         shortfall: shortfall, trimTracks: plan.suggestedCapacityTrim,
         removalCount: removalCount, plan: plan)
+    } else if plan.capacityShortfall != nil {
+      // Nothing can be dropped to recover the space; let preparation explain
+      // the shortfall instead of offering a trim of zero songs.
+      app.sync(device)
     } else if removalCount > 0 {
       syncConfirmation = SyncConfirmationInfo(
         shortfall: nil, trimTracks: [], removalCount: removalCount, plan: plan)
@@ -656,11 +660,14 @@ struct DeviceView: View {
       if let shortfall = plan.capacityShortfall {
         let trimCount = plan.suggestedCapacityTrim.count
         Label(
-          trimCount == 1
-            ? String(localized: "\(shortfall.byteText) over capacity — syncing would drop 1 song")
-            : String(
-              localized:
-                "\(shortfall.byteText) over capacity — syncing would drop \(trimCount) songs"),
+          trimCount == 0
+            ? String(
+              localized: "\(shortfall.byteText) over capacity — free up space to sync")
+            : trimCount == 1
+              ? String(localized: "\(shortfall.byteText) over capacity — syncing would drop 1 song")
+              : String(
+                localized:
+                  "\(shortfall.byteText) over capacity — syncing would drop \(trimCount) songs"),
           systemImage: "exclamationmark.triangle.fill"
         )
         .foregroundStyle(.orange)

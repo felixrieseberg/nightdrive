@@ -993,6 +993,13 @@ final class LibraryRelocationTests {
       playbackPersistence: PlaybackPersistenceStore(persistence: Memory()))
     let playlistID = try playlists.create(name: "Conflict", trackIDs: [straggler.id])
     try history.setRating(5, for: [straggler.id])
+    let stragglerStamp = try #require(FileGenerationStamp(url: stragglerURL))
+    try SyncLedgerStore.replaceEntries(
+      [
+        SyncLedgerEntry(
+          relativePath: "Loose/\(filename)", dbid: 7, fileSize: 1, fileModifiedAt: 0,
+          fileGenerationStamp: stragglerStamp, contentSHA256: "abc", deviceSignature: "sig")
+      ], for: 99, libraryFolder: folder)
     let plan = LibraryOrganizer.plan(
       tracks: store.tracks, root: folder, pattern: .artistAlbum,
       renameFiles: false, conflictPolicy: .moveToTrash)
@@ -1002,7 +1009,14 @@ final class LibraryRelocationTests {
         plan.changes(root: folder), expectedLibraryIdentity: store.identityRevision))
 
     #expect(result.failed.isEmpty)
+    #expect(result.sidecarWarning == nil)
     #expect((result.moved.count) == (1))
+    let ledgerEntries = SyncLedgerStore.entries(for: 99, libraryFolder: folder)
+    #expect(
+      (ledgerEntries.map(\.relativePath)) == ([destinationPath]),
+      Comment(rawValue: "the device copy linked to the trashed file must follow the keeper"))
+    #expect((ledgerEntries.first?.dbid) == (7))
+    #expect((ledgerEntries.first?.fileGenerationStamp) == (FileGenerationStamp(url: destinationURL)))
     #expect(!FileManager.default.fileExists(atPath: keeperURL.path))
     #expect(!FileManager.default.fileExists(atPath: stragglerURL.path))
     #expect(!FileManager.default.fileExists(atPath: folder.appendingPathComponent("Loose").path))

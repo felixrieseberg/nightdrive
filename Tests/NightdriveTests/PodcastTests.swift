@@ -98,6 +98,19 @@ struct PodcastFeedParserTests {
   }
 
   @Test
+  func testDurationRejectsOverflowAndImplausibleLengths() {
+    // Publisher-controlled components must never trap the process.
+    #expect(PodcastFeedParser.durationSeconds(from: "9223372036854775807:00") == nil)
+    #expect(PodcastFeedParser.durationSeconds(from: "9223372036854775807") == nil)
+    #expect(PodcastFeedParser.durationSeconds(from: "1:9223372036854775807:00") == nil)
+    #expect(PodcastFeedParser.durationSeconds(from: "99999999999999999999") == nil)
+    #expect(PodcastFeedParser.durationSeconds(from: "00:00:40000000") == nil)
+    let max = PodcastFeedParser.maxDurationSeconds
+    #expect(PodcastFeedParser.durationSeconds(from: String(max)) == max)
+    #expect(PodcastFeedParser.durationSeconds(from: String(max + 1)) == nil)
+  }
+
+  @Test
   func testPubDateVariants() {
     let numericZone = PodcastFeedParser.date(
       fromRFC822: "Mon, 12 Jan 2026 06:00:00 +0100")

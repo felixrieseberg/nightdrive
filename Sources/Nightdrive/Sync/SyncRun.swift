@@ -172,7 +172,7 @@ extension SyncEngine {
       } catch {
         throw SyncError.deviceCapacityUnavailable(underlying: error.localizedDescription)
       }
-      if neededOnDevice + 16_000_000 > available,
+      if neededOnDevice + SyncCapacity.reserveBytes > available,
         !executablePlan.copyToDevice.isEmpty || !executablePlan.updateOnDevice.isEmpty
       {
         throw SyncError.notEnoughSpace(needed: neededOnDevice, available: available)

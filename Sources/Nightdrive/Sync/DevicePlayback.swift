@@ -94,9 +94,13 @@ extension SyncEngine {
       return collection
     }
     guard entries.count <= db.tracks.count else {
+      // The file belongs to a database this sync may rewrite. Left in place, a
+      // later database with enough tracks would map its entries by position
+      // onto unrelated songs, so it is consumed along with this sync.
       collection.notes.append(
         "Ignored a Play Counts file that does not match the iPod's database; "
-          + "it was left in place.")
+          + "it was removed so it cannot be applied to a later database.")
+      collection.filesToDelete.append(fileURL)
       return collection
     }
     for (index, entry) in entries.enumerated() {

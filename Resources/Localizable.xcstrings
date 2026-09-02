@@ -155,6 +155,9 @@
     "%@ minutes" : {
 
     },
+    "%@ over capacity — free up space to sync" : {
+
+    },
     "%@ over capacity — syncing would drop %lld songs" : {
       "localizations" : {
         "en" : {
@@ -2604,6 +2607,16 @@
         }
       }
     },
+    "Not enough free space on %@ — the planned updates are %@ over and dropping new songs would not help. Free up space or narrow the sync scope." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Not enough free space on %1$@ — the planned updates are %2$@ over and dropping new songs would not help. Free up space or narrow the sync scope."
+          }
+        }
+      }
+    },
     "Not enough free space on the iPod: need %@, have %@." : {
       "localizations" : {
         "en" : {
@@ -2618,6 +2631,9 @@
 
     },
     "Not syncing: over capacity. Re-run with --trim to drop the suggested songs." : {
+
+    },
+    "Not syncing: planned updates are %@ over the iPod's free space, and dropping new songs would not help. Free up space or narrow the scope." : {
 
     },
     "Not syncing: still %@ over capacity after trimming." : {

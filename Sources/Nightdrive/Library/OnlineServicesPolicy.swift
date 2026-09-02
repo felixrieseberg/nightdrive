@@ -76,8 +76,14 @@ final class OnlineServicesPolicy {
       podcastsConsent = state.podcastsConsent
       podcastAutoRefresh = state.podcastAutoRefresh
     } catch {
-      // Saved state written by an older build starts fresh (the safe,
-      // consent-off defaults); only save failures surface to the UI.
+      // Unreadable saved state fails closed: the user may have withdrawn a
+      // consent this build can no longer read, and subscribed feeds refresh
+      // without a user action once podcasts are on. Only save failures
+      // surface to the UI.
+      consent = .unset
+      autoLookup = true
+      podcastsConsent = .disabled
+      podcastAutoRefresh = false
       NightdriveLog.app.error(
         "Saved online-services policy could not be decoded; using defaults: \(error.localizedDescription, privacy: .public)"
       )

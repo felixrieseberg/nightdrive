@@ -281,7 +281,7 @@ struct NightdriveApp: App {
               } catch {
                 return
               }
-              await appState?.preloadPodcastEpisodes()
+              await appState?.preloadPodcastEpisodes(automatic: true)
             }
             DebugSnapshot.armIfRequested(app: appState)
             var scriptOwnsScreen = DebugSnapshot.isDrivingTour

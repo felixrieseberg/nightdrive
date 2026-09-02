@@ -247,6 +247,30 @@ struct MusicBrainzAutoLookupTests {
 
   @MainActor
   @Test
+  func testPodcastsDefaultOnButMalformedPolicyFailsClosed() {
+    let fresh = OnlineServicesPolicy(persistence: MemoryPersistence())
+    #expect(fresh.isPodcastsEnabled)
+    #expect(fresh.isPodcastAutoRefreshActive)
+
+    let garbage = MemoryPersistence()
+    try? garbage.save(Data("not json".utf8))
+    let recovered = OnlineServicesPolicy(persistence: garbage)
+    #expect(!recovered.isEnabled)
+    #expect(!recovered.isAutoLookupActive)
+    #expect(
+      !recovered.isPodcastsEnabled,
+      Comment(rawValue: "unreadable consent must not turn background feed refresh on"))
+    #expect(!recovered.isPodcastAutoRefreshActive)
+    #expect(recovered.persistenceError == nil)
+
+    recovered.setPodcastsConsent(.enabled)
+    #expect(recovered.isPodcastsEnabled)
+    #expect(!recovered.isPodcastAutoRefreshActive)
+    #expect(OnlineServicesPolicy(persistence: garbage).isPodcastsEnabled)
+  }
+
+  @MainActor
+  @Test
   func testAutoLookupIsNeverActiveWithoutConsent() {
     let policy = OnlineServicesPolicy(persistence: MemoryPersistence())
     #expect(policy.autoLookup)

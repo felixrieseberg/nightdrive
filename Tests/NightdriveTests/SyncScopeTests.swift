@@ -817,6 +817,46 @@ struct SyncScopeTests: FakeIpodFixtureProviding {
   }
 
   @Test
+  func testTrimCannotRecoverAnUpdateOnlyShortfall() throws {
+    let settings = TranscodeSettings()
+    let family = IpodDeviceFamily.thirdGenerationOrLater
+    let updated = track(title: "Updated", sizeBytes: 5_000_000)
+    let entry = SyncLedgerEntry(
+      relativePath: "updated.mp3", dbid: 1, fileSize: 1, fileModifiedAt: 0,
+      fileGenerationStamp: FileGenerationStamp(
+        deviceID: 1, inode: 1, sizeBytes: 1, modificationSeconds: 0,
+        modificationNanoseconds: 0, changeSeconds: 0, changeNanoseconds: 0, generation: nil),
+      contentSHA256: "abc", deviceSignature: "sig")
+    var plan = SyncPlan(librarySnapshot: [])
+    plan.updateOnDevice = [SyncDeviceUpdate(local: updated, device: ITDBTrack(), entry: entry)]
+    let available = SyncCapacity.reserveBytes + 1_000_000
+
+    #expect(
+      SyncCapacity.shortfall(
+        plan: plan, availableCapacity: available, family: family, settings: settings)
+        == 4_000_000)
+    #expect(
+      !SyncCapacity.trimCanRecover(
+        plan: plan, availableCapacity: available, family: family, settings: settings),
+      Comment(rawValue: "dropping zero copies can never recover an update-only shortfall"))
+
+    plan.copyToDevice = [track(title: "New", sizeBytes: 2_000_000)]
+    #expect(
+      !SyncCapacity.trimCanRecover(
+        plan: plan, availableCapacity: available, family: family, settings: settings),
+      Comment(rawValue: "copies that fit alongside an oversized update do not help"))
+
+    plan.updateOnDevice = []
+    #expect(
+      SyncCapacity.trimCanRecover(
+        plan: plan, availableCapacity: available, family: family, settings: settings))
+    #expect(
+      SyncCapacity.trimCanRecover(
+        plan: plan, availableCapacity: 0, family: family, settings: settings),
+      Comment(rawValue: "leaving every copy out always fits when nothing else is planned"))
+  }
+
+  @Test
   func testTranscodeEstimateUsesBitrateTimesDuration() throws {
     let settings = TranscodeSettings()
     let flac = track(title: "Big", ext: "flac", sizeBytes: 50_000_000, durationMS: 60_000)

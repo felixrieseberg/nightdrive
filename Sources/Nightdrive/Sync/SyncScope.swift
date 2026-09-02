@@ -317,6 +317,25 @@ enum SyncCapacity {
     return over > 0 ? over : nil
   }
 
+  /// Whether leaving new copies out of `plan` can bring it within capacity.
+  /// Device updates replace files in place and are never deferred, so a
+  /// shortfall they cause on their own is only fixed by freeing space or
+  /// narrowing the scope; offering a trim then would drop nothing and still
+  /// fail the post-trim check.
+  static func trimCanRecover(
+    plan: SyncPlan, availableCapacity: Int64,
+    family: IpodDeviceFamily, settings: TranscodeSettings
+  ) -> Bool {
+    var withoutCopies = plan
+    withoutCopies.copyToDevice = []
+    return shortfall(
+      plan: withoutCopies, availableCapacity: availableCapacity,
+      family: family, settings: settings) == nil
+  }
+
+  /// Copies to leave out, lowest-rated and least-recently-played first, that
+  /// together recover `shortfall`. Callers check `trimCanRecover` first; the
+  /// list is only meaningful when copies alone caused the shortfall.
   static func suggestedTrim(
     plan: SyncPlan, shortfall: Int64,
     family: IpodDeviceFamily, settings: TranscodeSettings

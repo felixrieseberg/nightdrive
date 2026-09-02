@@ -611,14 +611,16 @@ struct PlayCountsSyncTests: FakeIpodFixtureProviding {
   }
 
   @Test
-  func testEntryCountBeyondDatabaseIsIgnored() async throws {
+  func testEntryCountBeyondDatabaseIsIgnoredAndConsumed() async throws {
     let local = try makeLinkedPair()
     try writePlayCounts(entries: [[1], [1], [1]])
 
     let result = try await runSync(try makeSnapshotPlan(library: [local]))
     #expect(result.playbackReport == nil)
-    #expect((result.playCountsFilesToDelete) == ([]))
     #expect((result.playbackNotes.count) == (1))
-    #expect(FileManager.default.fileExists(atPath: PlayCountsFile.url(in: fs).path))
+    #expect((try fs.readDatabase().tracks[0].playCount) == (0))
+    // A file that does not fit this database must not survive to be mapped
+    // by position onto a later, larger database.
+    #expect((result.playCountsFilesToDelete) == ([PlayCountsFile.url(in: fs)]))
   }
 }
