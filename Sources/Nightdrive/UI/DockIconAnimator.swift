@@ -1,4 +1,5 @@
 import AppKit
+import ImageIO
 
 /// Animates the Dock icon while music plays: the committed icon artwork's
 /// centre dashes and reflector posts march toward the viewer on a seamless
@@ -11,7 +12,8 @@ final class DockIconAnimator {
   private static let frameInterval: TimeInterval = 1.0 / 12.0
 
   private let player: PlayerController
-  private var frames: [NSImage] = []
+  private var frames: [CGImage] = []
+  private var iconView: DockIconView?
   private var timer: Timer?
   private var frameIndex = 0
   private var isWindowResizing = false
@@ -24,19 +26,37 @@ final class DockIconAnimator {
   /// Loads the frame loop and begins tracking playback state.
   func start() {
     guard frames.isEmpty else { return }
-    frames = Self.loadFrames()
+    frames = Self.loadDecodedFrames()
     guard !frames.isEmpty else { return }
     observeLiveResize()
     observePlayback()
   }
 
   static func loadFrames() -> [NSImage] {
+    loadDecodedFrames().map { frame in
+      let image = NSImage(size: NSSize(width: frame.width, height: frame.height))
+      image.addRepresentation(NSBitmapImageRep(cgImage: frame))
+      return image
+    }
+  }
+
+  /// ImageIO otherwise leaves PNG decompression until a frame is first drawn,
+  /// putting twelve small decode stalls in the first animation cycle.
+  private static func loadDecodedFrames() -> [CGImage] {
     guard
       let urls = Bundle.module.urls(
         forResourcesWithExtension: "png", subdirectory: "DockIconFrames")
     else { return [] }
     return urls.sorted { $0.lastPathComponent < $1.lastPathComponent }
-      .compactMap { NSImage(contentsOf: $0) }
+      .compactMap { url in
+        guard let source = CGImageSourceCreateWithURL(url as CFURL, nil) else { return nil }
+        return CGImageSourceCreateImageAtIndex(
+          source, 0,
+          [
+            kCGImageSourceShouldCache: true,
+            kCGImageSourceShouldCacheImmediately: true,
+          ] as CFDictionary)
+      }
   }
 
   private func observePlayback() {
@@ -112,11 +132,46 @@ final class DockIconAnimator {
     // A resize pause resumes where it stopped; only a real halt rewinds.
     guard !isWindowResizing else { return }
     frameIndex = 0
-    NSApp.applicationIconImage = nil
+    if iconView != nil {
+      NSApp.dockTile.contentView = nil
+      NSApp.dockTile.display()
+      iconView = nil
+    }
   }
 
   private func advanceFrame() {
     frameIndex = (frameIndex + 1) % frames.count
-    NSApp.applicationIconImage = frames[frameIndex]
+    let dockTile = NSApp.dockTile
+    let iconView: DockIconView
+    if let existing = self.iconView {
+      iconView = existing
+    } else {
+      iconView = DockIconView(frame: NSRect(origin: .zero, size: dockTile.size))
+      dockTile.contentView = iconView
+      self.iconView = iconView
+    }
+    if iconView.frame.size != dockTile.size {
+      iconView.frame.size = dockTile.size
+    }
+    iconView.image = frames[frameIndex]
+    dockTile.display()
+  }
+}
+
+/// Supplying the animation as Dock-tile content avoids changing the
+/// application's icon on every tick. `applicationIconImage` makes AppKit
+/// rebuild an icon representation each time; this view draws an already
+/// decoded CGImage straight into the tile instead.
+private final class DockIconView: NSView {
+  var image: CGImage? {
+    didSet { needsDisplay = true }
+  }
+
+  override var isOpaque: Bool { false }
+
+  override func draw(_ dirtyRect: NSRect) {
+    guard let image, let context = NSGraphicsContext.current?.cgContext else { return }
+    context.interpolationQuality = .high
+    context.draw(image, in: bounds)
   }
 }

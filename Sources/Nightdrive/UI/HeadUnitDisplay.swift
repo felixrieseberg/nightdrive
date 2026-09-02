@@ -323,13 +323,13 @@ struct VFDGlass: View {
 struct VFDScanlines: View {
   var body: some View {
     Canvas { ctx, size in
+      var scanlines = Path()
       var y: CGFloat = 1
       while y < size.height {
-        ctx.fill(
-          Path(CGRect(x: 0, y: y, width: size.width, height: 1)),
-          with: .color(.black.opacity(0.14)))
+        scanlines.addRect(CGRect(x: 0, y: y, width: size.width, height: 1))
         y += 3
       }
+      ctx.fill(scanlines, with: .color(.black.opacity(0.14)))
     }
     .allowsHitTesting(false)
   }
@@ -661,16 +661,22 @@ struct BlockProgressBar: View {
       let gap: CGFloat = 2
       let cellWidth = (size.width - CGFloat(cells - 1) * gap) / CGFloat(cells)
       let lit = Int((fraction * Double(cells)).rounded())
+      var litCells = Path()
+      var ghostCells = Path()
       for i in 0..<cells {
         let rect = CGRect(
           x: CGFloat(i) * (cellWidth + gap), y: 0, width: cellWidth, height: size.height)
         if i < lit {
-          var glow = ctx
-          glow.addFilter(.shadow(color: glowInk.opacity(0.7), radius: 1.5))
-          glow.fill(Path(rect), with: .color(glowInk))
+          litCells.addRect(rect)
         } else {
-          ctx.fill(Path(rect), with: .color(ghostInk))
+          ghostCells.addRect(rect)
         }
+      }
+      ctx.fill(ghostCells, with: .color(ghostInk))
+      if !litCells.isEmpty {
+        var glow = ctx
+        glow.addFilter(.shadow(color: glowInk.opacity(0.7), radius: 1.5))
+        glow.fill(litCells, with: .color(glowInk))
       }
     }
     .frame(height: height)

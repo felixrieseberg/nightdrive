@@ -74,10 +74,10 @@ struct VisualizerView: View {
               isPlaying: player.isPlaying, booting: booting),
             paused: !active || !windowIsVisible || windowIsLiveResizing)
         ) { timeline in
-          canvas(visualizer, now: timeline.date)
+          canvas(visualizer, now: timeline.date, observesAnalysis: false)
         }
       } else {
-        canvas(visualizer, now: .now)
+        canvas(visualizer, now: .now, observesAnalysis: true)
       }
     }
     .contentShape(Rectangle())
@@ -101,9 +101,15 @@ struct VisualizerView: View {
     }
   }
 
-  private func canvas(_ visualizer: any Visualizer, now: Date) -> some View {
-    // A hidden window reads untracked values so it stops re-rendering and
-    // releases its render surfaces; the windowIsVisible flip refreshes it.
+  private func canvas(
+    _ visualizer: any Visualizer, now: Date, observesAnalysis: Bool
+  ) -> some View {
+    // A TimelineView already supplies every requested animation frame. Its
+    // renderer samples the backing values directly so the player's matching
+    // 24 Hz publications do not create a second invalidation stream. Static
+    // modes still observe those publications because they have no timeline.
+    // Hidden windows use untracked values in both cases and stop rendering.
+    let tracksPlayerFrames = observesAnalysis && windowIsVisible
     let resizing = windowIsLiveResizing
     var frame = VisualizerFrame(
       size: .zero,
@@ -112,11 +118,11 @@ struct VisualizerView: View {
         : clock.advance(
           to: now,
           scale: VisualizerHeartbeat.timeScale(isPlaying: player.isPlaying, booting: booting)),
-      spectrum: windowIsVisible ? player.spectrum : player.untrackedSpectrum,
-      peaks: windowIsVisible ? player.spectrumPeaks : player.untrackedSpectrumPeaks,
-      waveform: windowIsVisible ? player.waveform : player.untrackedWaveform,
-      level: windowIsVisible ? player.meterLevel : player.untrackedMeterLevel,
-      elapsed: windowIsVisible ? player.elapsed : player.untrackedElapsed,
+      spectrum: tracksPlayerFrames ? player.spectrum : player.untrackedSpectrum,
+      peaks: tracksPlayerFrames ? player.spectrumPeaks : player.untrackedSpectrumPeaks,
+      waveform: tracksPlayerFrames ? player.waveform : player.untrackedWaveform,
+      level: tracksPlayerFrames ? player.meterLevel : player.untrackedMeterLevel,
+      elapsed: tracksPlayerFrames ? player.elapsed : player.untrackedElapsed,
       duration: player.duration,
       isPlaying: player.isPlaying && active && windowIsVisible,
       title: player.currentTrack?.displayTitle ?? "",
