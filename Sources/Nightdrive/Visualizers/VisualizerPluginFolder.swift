@@ -204,8 +204,8 @@ enum VisualizerExamples {
 
   static let all: [Example] = {
     guard
-      let folder = Bundle.module.url(
-        forResource: "VisualizerExamples", withExtension: nil)
+      let bundle = Bundle.nightdriveResources,
+      let folder = bundle.url(forResource: "VisualizerExamples", withExtension: nil)
     else { return [] }
     return shippedNames.compactMap { name in
       guard

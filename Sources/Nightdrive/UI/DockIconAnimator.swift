@@ -44,8 +44,8 @@ final class DockIconAnimator {
   /// putting twelve small decode stalls in the first animation cycle.
   private static func loadDecodedFrames() -> [CGImage] {
     guard
-      let urls = Bundle.module.urls(
-        forResourcesWithExtension: "png", subdirectory: "DockIconFrames")
+      let bundle = Bundle.nightdriveResources,
+      let urls = bundle.urls(forResourcesWithExtension: "png", subdirectory: "DockIconFrames")
     else { return [] }
     return urls.sorted { $0.lastPathComponent < $1.lastPathComponent }
       .compactMap { url in
