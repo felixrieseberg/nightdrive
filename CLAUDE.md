@@ -97,12 +97,9 @@ a real device; the recording lands in `~/Movies/Nightdrive Demos` unless
 `NIGHTDRIVE_DEMO_OUTPUT_DIR` says otherwise.
 
 `make demo-video` re-encodes the newest such recording into `docs/demo.mp4`,
-the clip the website autoplays, and writes its poster frame. Sizzle records at
-native resolution and frame rate, which is far too heavy to serve; the script
-header in [`scripts/encode-demo-video.sh`](scripts/encode-demo-video.sh)
-explains the width, frame rate, and quality it settles on and why. It warns
-when a differently shaped recording no longer matches the dimensions
-`docs/index.html` and `docs/styles.css` declare.
+the clip the website autoplays, and its poster frame. The header of
+[`scripts/encode-demo-video.sh`](scripts/encode-demo-video.sh) explains the
+size and quality it settles on and why.
 
 ## Conventions
 
