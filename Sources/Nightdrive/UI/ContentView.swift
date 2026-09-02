@@ -618,7 +618,9 @@ struct ContentView: View {
       return count == 1
         ? String(localized: "1 podcast") : String(localized: "\(count) podcasts")
     default:
-      let stats = app.library.totalStats
+      // The Music list hides podcast episodes, so its footer counts the same
+      // tracks the table shows.
+      let stats = app.library.musicStats
       return libraryStatsText(
         count: stats.count, durationMS: stats.durationMS, sizeBytes: stats.sizeBytes)
     }
@@ -879,7 +881,9 @@ struct LibraryView: View {
   private func buildTableModel(inputs: TableModelInputs) -> TableModel {
     var model = TableModel()
     model.catalog = app.library.catalog
-    model.libraryTracks = app.library.tracks
+    // Unscoped is the Music list, which leaves out podcast episodes; they
+    // browse under Podcasts instead.
+    model.libraryTracks = inputs.scopedTracks == nil ? app.library.musicTracks : app.library.tracks
     model.listeningMetadata = inputs.listeningMetadata
 
     let visible = inputs.scopedTracks ?? model.libraryTracks

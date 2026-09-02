@@ -186,7 +186,9 @@ struct QuickSearchPalette: View {
       let albums = app.library.collections(for: .album)
       let genres = app.library.collections(for: .genre)
       let audiobooks = app.library.collections(for: .audiobook)
-      let tracks = app.library.tracks
+      // Song hits reveal in the Music view, which hides podcast episodes;
+      // those are reachable through their subscription instead.
+      let tracks = app.library.musicTracks
       await music.resolve(
         query: query, revision: app.library.derivedDataRevision,
         buildIndex: {

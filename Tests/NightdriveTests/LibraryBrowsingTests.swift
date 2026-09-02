@@ -705,6 +705,84 @@ final class LibraryBrowsingTests {
     #expect(store.tracks.isEmpty)
   }
 
+  @Test
+  func testMusicTracksAndStatsExcludePodcastEpisodes() async throws {
+    try writeSong(
+      "song.mp3", title: "Song", artist: "Artist", album: "Album", genre: "Rock")
+    try writeSong(
+      "episode.mp3", title: "Episode", artist: "Show", album: "Show", genre: "Podcast")
+
+    let store = LibraryStore(folderURL: folder)
+    await store.rescan()
+
+    let episode = try #require(store.tracks.first { $0.displayTitle == "Episode" })
+    #expect((episode.mediaKind) == (.podcast))
+    #expect((store.tracks.count) == (2))
+    #expect((store.totalStats.count) == (2))
+
+    #expect((store.musicTracks.map(\.displayTitle)) == (["Song"]))
+    #expect((store.musicStats.count) == (1))
+    #expect((store.musicStats.durationMS) < (store.totalStats.durationMS))
+    #expect((store.musicStats.sizeBytes) < (store.totalStats.sizeBytes))
+  }
+
+  @Test
+  func testBrowseCollectionsExcludePodcastEpisodes() async throws {
+    try writeSong(
+      "song.mp3", title: "Song", artist: "Artist", album: "Album", genre: "Rock")
+    try writeSong(
+      "episode.mp3", title: "Episode", artist: "Show", album: "Season One", genre: "Podcast")
+
+    let store = LibraryStore(folderURL: folder)
+    await store.rescan()
+
+    #expect((store.collections(for: .artist).map(\.title)) == (["Artist"]))
+    #expect((store.collections(for: .album).map(\.title)) == (["Album"]))
+    #expect((store.collections(for: .genre).map(\.title)) == (["Rock"]))
+
+    let episode = try #require(store.tracks.first { $0.displayTitle == "Episode" })
+    for kind in LibraryBrowseKind.allCases {
+      #expect(store.collectionIDs(containingAny: [episode.id], for: kind).isEmpty)
+    }
+  }
+
+  @Test
+  func testBrowseCollectionsDropPodcastEpisodesAddedIncrementally() async throws {
+    try writeSong(
+      "song.mp3", title: "Song", artist: "Shared Artist", album: "Album", genre: "Rock")
+    let store = LibraryStore(folderURL: folder)
+    await store.rescan()
+
+    // The episode shares the song's artist, so its arrival dirties an
+    // existing collection and exercises the incremental browser update.
+    try writeSong(
+      "episode.mp3", title: "Episode", artist: "Shared Artist", album: "Album",
+      genre: "Podcast")
+    await store.rescan()
+
+    #expect((store.collections(for: .artist).map(\.tracks.count)) == ([1]))
+    #expect(
+      (store.collections(for: .artist).first?.tracks.map(\.displayTitle)) == (["Song"]))
+    #expect((store.collections(for: .album).first?.tracks.map(\.displayTitle)) == (["Song"]))
+  }
+
+  @Test
+  func testMusicTracksFollowIncrementalLibraryChanges() async throws {
+    try writeSong(
+      "song.mp3", title: "Song", artist: "Artist", album: "Album", genre: "Rock")
+    let store = LibraryStore(folderURL: folder)
+    await store.rescan()
+    #expect((store.musicTracks.count) == (1))
+
+    try writeSong(
+      "episode.mp3", title: "Episode", artist: "Show", album: "Show", genre: "Podcast")
+    await store.rescan()
+
+    #expect((store.tracks.count) == (2))
+    #expect((store.musicTracks.map(\.displayTitle)) == (["Song"]))
+    #expect((store.musicStats.count) == (1))
+  }
+
   private func writeSong(
     _ name: String,
     title: String,

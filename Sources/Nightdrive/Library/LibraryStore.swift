@@ -334,6 +334,10 @@ private struct PreparedLibrary: Sendable {
   let totalCount: Int
   let totalDurationMS: Int
   let totalSizeBytes: Int
+  let musicTracks: [LibraryTrack]
+  let musicCount: Int
+  let musicDurationMS: Int
+  let musicSizeBytes: Int
   let browsers: [LibraryBrowseKind: LibraryBrowserIndex]
   let tracksByPathKey: [String: LibraryTrack]
 }
@@ -454,6 +458,8 @@ final class LibraryStore {
   @ObservationIgnored private var derivedTracks: [DerivedLibraryTrack] = []
   @ObservationIgnored private var tracksByCanonicalPath: [String: LibraryTrack] = [:]
   @ObservationIgnored private var cachedTotalStats = (count: 0, durationMS: 0, sizeBytes: 0)
+  @ObservationIgnored private var cachedMusicTracks: [LibraryTrack] = []
+  @ObservationIgnored private var cachedMusicStats = (count: 0, durationMS: 0, sizeBytes: 0)
   @ObservationIgnored private var browserCache: [LibraryBrowseKind: LibraryBrowserIndex] = [:]
   #if DEBUG
     @ObservationIgnored private(set) var browserIndexFallbackBuildCount = 0
@@ -601,6 +607,18 @@ final class LibraryStore {
   var totalStats: (count: Int, durationMS: Int, sizeBytes: Int) {
     _ = derivedDataRevision
     return cachedTotalStats
+  }
+
+  /// The library minus podcast episodes, in library order. Podcast downloads
+  /// browse under Podcasts, so the Music list and its stats leave them out.
+  var musicTracks: [LibraryTrack] {
+    _ = derivedDataRevision
+    return cachedMusicTracks
+  }
+
+  var musicStats: (count: Int, durationMS: Int, sizeBytes: Int) {
+    _ = derivedDataRevision
+    return cachedMusicStats
   }
 
   private var scanGeneration = 0
@@ -1526,6 +1544,7 @@ final class LibraryStore {
     try Task.checkCancellation()
     let sortedTracks = sortedDerived.map(\.track)
     let totalStats = try makeTotalStats(for: sortedTracks)
+    let musicPartition = try makeMusicPartition(for: sortedTracks)
     progress?(2, progressTotal)
     let browsers = try await withThrowingTaskGroup(
       of: (LibraryBrowseKind, LibraryBrowserIndex).self,
@@ -1557,6 +1576,10 @@ final class LibraryStore {
       totalCount: totalStats.count,
       totalDurationMS: totalStats.durationMS,
       totalSizeBytes: totalStats.sizeBytes,
+      musicTracks: musicPartition.tracks,
+      musicCount: musicPartition.stats.count,
+      musicDurationMS: musicPartition.stats.durationMS,
+      musicSizeBytes: musicPartition.stats.sizeBytes,
       browsers: browsers,
       tracksByPathKey: tracksByPathKey)
   }
@@ -1571,6 +1594,25 @@ final class LibraryStore {
       totalStats.sizeBytes += track.sizeBytes
     }
     return totalStats
+  }
+
+  /// The podcast-free slice of the library plus its stats, derived once per
+  /// prepared library so the Music list doesn't filter on every table rebuild.
+  nonisolated private static func makeMusicPartition(
+    for sortedTracks: [LibraryTrack]
+  ) throws -> (tracks: [LibraryTrack], stats: (count: Int, durationMS: Int, sizeBytes: Int)) {
+    var tracks: [LibraryTrack] = []
+    tracks.reserveCapacity(sortedTracks.count)
+    var stats = (count: 0, durationMS: 0, sizeBytes: 0)
+    for (offset, track) in sortedTracks.enumerated() {
+      if offset.isMultiple(of: 256) { try Task.checkCancellation() }
+      guard track.mediaKind != .podcast else { continue }
+      tracks.append(track)
+      stats.count += 1
+      stats.durationMS += track.durationMS
+      stats.sizeBytes += track.sizeBytes
+    }
+    return (tracks, stats)
   }
 
   /// Applies a small set of removed and reloaded tracks to an
@@ -1631,6 +1673,7 @@ final class LibraryStore {
 
     let sortedTracks = merged.map(\.track)
     let totalStats = try makeTotalStats(for: sortedTracks)
+    let musicPartition = try makeMusicPartition(for: sortedTracks)
 
     var browsers: [LibraryBrowseKind: LibraryBrowserIndex] = [:]
     browsers.reserveCapacity(snapshot.browsers.count)
@@ -1648,6 +1691,10 @@ final class LibraryStore {
         totalCount: totalStats.count,
         totalDurationMS: totalStats.durationMS,
         totalSizeBytes: totalStats.sizeBytes,
+        musicTracks: musicPartition.tracks,
+        musicCount: musicPartition.stats.count,
+        musicDurationMS: musicPartition.stats.durationMS,
+        musicSizeBytes: musicPartition.stats.sizeBytes,
         browsers: browsers,
         tracksByPathKey: tracksByPathKey),
       removedTracks: removedEntries.map(\.track))
@@ -1784,6 +1831,12 @@ final class LibraryStore {
       prepared.totalDurationMS,
       prepared.totalSizeBytes
     )
+    cachedMusicTracks = prepared.musicTracks
+    cachedMusicStats = (
+      prepared.musicCount,
+      prepared.musicDurationMS,
+      prepared.musicSizeBytes
+    )
     browserCache = prepared.browsers
     catalog = prepared.catalog
     tracksByCanonicalPath = prepared.tracksByPathKey
@@ -1793,6 +1846,8 @@ final class LibraryStore {
   private func installEmptyCatalog() {
     derivedTracks = []
     cachedTotalStats = (count: 0, durationMS: 0, sizeBytes: 0)
+    cachedMusicTracks = []
+    cachedMusicStats = (count: 0, durationMS: 0, sizeBytes: 0)
     browserCache = [:]
     catalog = LibraryCatalog()
     tracksByCanonicalPath = [:]
@@ -1873,10 +1928,7 @@ final class LibraryStore {
     // Audiobooks browse like albums: one collection per book, restricted to
     // tracks marked as audiobooks.
     let groupsAsAlbums = kind == .album || kind == .audiobook
-    let derivedTracks =
-      kind == .audiobook
-      ? derivedTracks.filter { $0.track.mediaKind == .audiobook }
-      : derivedTracks
+    let derivedTracks = derivedTracks.filter { browses($0, in: kind) }
 
     var grouped: [GroupKey: [DerivedLibraryTrack]] = [:]
     var albumArtists: [GroupKey: String] = [:]
@@ -1948,6 +2000,18 @@ final class LibraryStore {
     }
     try Task.checkCancellation()
     return collections.sorted(by: Self.collectionSort)
+  }
+
+  /// Which tracks a browse list groups. Audiobooks list only tracks marked as
+  /// audiobooks; every other list leaves out podcast episodes, which browse
+  /// under Podcasts instead.
+  nonisolated private static func browses(
+    _ entry: DerivedLibraryTrack, in kind: LibraryBrowseKind
+  ) -> Bool {
+    switch kind {
+    case .audiobook: entry.track.mediaKind == .audiobook
+    case .artist, .album, .genre: entry.track.mediaKind != .podcast
+    }
   }
 
   nonisolated private static func collectionSort(
