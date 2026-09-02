@@ -44,20 +44,28 @@
       </p>
 
       <section class="section proof">
-        <video
-          class="demo-video"
-          src="./demo.mp4"
-          poster="./demo-poster.jpg"
-          width="1328"
-          height="874"
-          autoplay
-          muted
-          loop
-          playsinline
-          controls
-          aria-label="Screen recording of Nightdrive: browsing a music library, subscribing to podcasts, the fold-down VFD deck with visualizers, and syncing to a classic iPod."
-        ></video>
+        <button class="demo-trigger" type="button" aria-label="Play the demo video full size">
+          <video
+            class="demo-video"
+            src="./demo.mp4"
+            poster="./demo-poster.jpg"
+            width="1328"
+            height="874"
+            autoplay
+            muted
+            loop
+            playsinline
+            aria-label="Screen recording of Nightdrive: browsing a music library, subscribing to podcasts, the fold-down VFD deck with visualizers, and syncing to a classic iPod."
+          ></video>
+          <span class="demo-expand" aria-hidden="true">[ ⤢ EXPAND ]</span>
+        </button>
       </section>
+
+      <dialog class="demo-lightbox" aria-label="Nightdrive demo video">
+        <div class="demo-lightbox-stage">
+          <button class="demo-close" type="button">[ ✕ CLOSE ]</button>
+        </div>
+      </dialog>
 
       <section class="section" aria-labelledby="features-heading">
         <h2 class="section-heading" id="features-heading">
@@ -106,14 +114,64 @@
     </main>
 
     <script>
-      // The site otherwise ships no JavaScript. This exists only so the
-      // autoplaying demo honours the same reduced-motion preference the
-      // stylesheet already respects.
+      // The site otherwise ships no JavaScript. This exists only for the demo
+      // video: honouring the same reduced-motion preference the stylesheet
+      // already respects, and lifting the clip into a lightbox on click.
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         for (const video of document.querySelectorAll("video[autoplay]")) {
           video.autoplay = false;
           video.pause();
         }
+      }
+
+      const trigger = document.querySelector(".demo-trigger");
+      const lightbox = document.querySelector(".demo-lightbox");
+      const stage = document.querySelector(".demo-lightbox-stage");
+      const closeButton = document.querySelector(".demo-close");
+      const video = document.querySelector(".demo-video");
+
+      // The same element moves between the page and the lightbox, so the clip
+      // never restarts and only one copy of the video is ever decoding.
+      function moveVideo(parent) {
+        const wasPlaying = !video.paused;
+        const time = video.currentTime;
+        parent.prepend(video);
+        // A moved <video> can reload, which throws the seek away again, so the
+        // position is restored both now and once metadata is back.
+        const restore = () => {
+          video.currentTime = time;
+        };
+        restore();
+        video.addEventListener("loadedmetadata", restore, { once: true });
+        setTimeout(() => video.removeEventListener("loadedmetadata", restore), 1000);
+        if (wasPlaying) {
+          video.play().catch(() => {});
+        }
+      }
+
+      if (trigger && lightbox && stage && closeButton && video && typeof lightbox.showModal === "function") {
+        trigger.addEventListener("click", () => {
+          moveVideo(stage);
+          video.controls = true;
+          lightbox.showModal();
+          closeButton.focus();
+        });
+
+        closeButton.addEventListener("click", () => lightbox.close());
+
+        // Anything outside the video itself — the dimmed page behind it —
+        // dismisses the lightbox, as does Escape via the dialog's own handling.
+        lightbox.addEventListener("click", (event) => {
+          if (event.target === lightbox || event.target === stage) {
+            lightbox.close();
+          }
+        });
+
+        lightbox.addEventListener("close", () => {
+          video.controls = false;
+          moveVideo(trigger);
+          trigger.focus();
+        });
       }
     </script>
   </body>
