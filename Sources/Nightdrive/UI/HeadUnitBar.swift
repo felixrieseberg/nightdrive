@@ -105,12 +105,12 @@ struct HeadUnitBar: View {
         .allowsHitTesting(false)
     }
     .background {
-      faceplate
+      Self.faceplate
         .windowDraggable()
     }
   }
 
-  private var faceplate: some View {
+  static var faceplate: some View {
     LinearGradient(
       colors: [Bodywork.faceplateTop, Bodywork.faceplateBottom],
       startPoint: .top, endPoint: .bottom
@@ -119,7 +119,7 @@ struct HeadUnitBar: View {
       Rectangle().fill(.white.opacity(0.07)).frame(height: 1)
     }
     .overlay(alignment: .bottom) {
-      seam
+      Self.seam
     }
     .overlay(
       Canvas { ctx, size in
@@ -134,7 +134,7 @@ struct HeadUnitBar: View {
       .allowsHitTesting(false))
   }
 
-  private var seam: some View {
+  private static var seam: some View {
     Rectangle()
       .fill(.black.opacity(0.55))
       .frame(height: 1)

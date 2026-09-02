@@ -7,6 +7,8 @@ This is my take on a media player with bi-directional iPod syncing and a
 visualizer deck that hopefully reminds you of fancy car stereos in the
 1990s and 2000s.
 
+![The Nightdrive window, its VFD deck folded down over the library](docs/screenshot.png)
+
 Features:
 
 - Play and browse a folder-based audio library, with (smart) playlists,
@@ -18,8 +20,7 @@ Features:
 - A fold-down VFD deck with visualizers, themed colourways, and a detachable
   floating mini-player. You can build your own via plugins!
 - Fully native and performant macOS app
-- Free without accounts, ads, or subscriptions. It's
-  [open-source](https://github.com/felixrieseberg/nightdrive), too.
+- Free without accounts, ads, or subscriptions
 
 # Install
 Download the newest build from
