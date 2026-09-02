@@ -95,8 +95,8 @@ struct AcknowledgmentsWindow: View {
 enum ThirdPartyNotices {
   static let sparkleLicense: String = {
     guard
-      let directory = Bundle.module.url(
-        forResource: "ThirdPartyNotices", withExtension: nil),
+      let bundle = Bundle.nightdriveResources,
+      let directory = bundle.url(forResource: "ThirdPartyNotices", withExtension: nil),
       let text = try? String(
         contentsOf: directory.appending(path: "Sparkle.txt"), encoding: .utf8)
     else {
